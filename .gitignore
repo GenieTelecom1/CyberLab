@@ -13,3 +13,6 @@
 target/
 .gradle/
 build/
+
+# Secrets (ne jamais envoyer sur Git)
+db.properties

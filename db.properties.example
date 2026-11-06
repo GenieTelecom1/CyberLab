@@ -1,0 +1,3 @@
+db.url=jdbc:postgresql://HOTE_DU_SESSION_POOLER:5432/postgres?sslmode=require
+db.user=postgres.IDENTIFIANT_DU_PROJET
+db.password=DEMANDER_AU_MEMBRE_1
