@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" spacing="12" styleClass="auth-card" maxWidth="380" xmlns:fx="http://javafx.com/fxml" fx:controller="com.cyberlab.controller.SignUpController">
+<Label text="Créer un compte" styleClass="title"/>
+<TextField fx:id="nomField" promptText="Nom"/>
+<TextField fx:id="emailField" promptText="E-mail"/>
+<PasswordField fx:id="passwordField" promptText="Mot de passe (8 caractères minimum)"/>
+<PasswordField fx:id="confirmField" promptText="Confirmer le mot de passe" onAction="#onSignUp"/>
+<Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
+<Button fx:id="signUpButton" text="S'inscrire" onAction="#onSignUp" defaultButton="true"/>
+<Hyperlink text="Déjà un compte ? Se connecter" onAction="#onGoToLogin"/>
+</VBox>
