@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cyberlab.controller.MainShellController" styleClass="root-pane">
+    <left>
+        <VBox styleClass="sidebar" prefWidth="230" spacing="6">
+            <VBox styleClass="logo-box" spacing="2">
+                <Label text="CyberLab" styleClass="logo-title"/>
+                <Label text="APPRENDRE. PRATIQUER. PROTÉGER." styleClass="logo-sub"/>
+            </VBox>
+            <Label text="PRINCIPAL" styleClass="section-label"/>
+            <Button fx:id="navDashboard"   text="Tableau de bord" styleClass="nav-button" maxWidth="Infinity" onAction="#goDashboard"/>
+            <Button fx:id="navCourses"     text="Cours"           styleClass="nav-button" maxWidth="Infinity" onAction="#goCourses"/>
+            <Button fx:id="navQuiz"        text="Quiz"            styleClass="nav-button" maxWidth="Infinity" onAction="#goQuiz"/>
+            <Button fx:id="navSimulations" text="Simulations"     styleClass="nav-button" maxWidth="Infinity" onAction="#goSimulations"/>
+            <Button fx:id="navLeaderboard" text="Classement"      styleClass="nav-button" maxWidth="Infinity" onAction="#goLeaderboard"/>
+            <Button fx:id="navChatbot"     text="Assistant IA"    styleClass="nav-button" maxWidth="Infinity" onAction="#goChatbot"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            <Button fx:id="navLogout" text="Déconnexion" styleClass="nav-button, nav-logout" maxWidth="Infinity" onAction="#logout"/>
+            <VBox styleClass="sidebar-panel" alignment="TOP_CENTER" spacing="6">
+                <ImageView fitWidth="170" preserveRatio="true" smooth="true">
+                    <image><Image url="@../images/sidebar_shield.png"/></image>
+                </ImageView>
+                <Label text="Ensemble" styleClass="sidebar-panel-title"/>
+                <Label text="pour un internet plus sécurisé !" styleClass="sidebar-panel-sub" wrapText="true" textAlignment="CENTER"/>
+                <Region styleClass="sidebar-accent" minWidth="40" prefWidth="40" maxWidth="40" minHeight="3" prefHeight="3" maxHeight="3"/>
+            </VBox>
+        </VBox>
+    </left>
+    <center>
+        <BorderPane>
+            <top>
+                <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
+                    <VBox spacing="2">
+                        <Label fx:id="pageTitle" text="Tableau de bord" styleClass="page-title"/>
+                    </VBox>
+                    <TextField promptText="Rechercher des cours, labs, utilisateurs…" styleClass="search-field" HBox.hgrow="ALWAYS" maxWidth="520"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+            </top>
+            <center>
+                <StackPane fx:id="contentArea"/>
+            </center>
+        </BorderPane>
+    </center>
+</BorderPane>

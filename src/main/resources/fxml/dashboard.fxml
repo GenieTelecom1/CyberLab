@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cyberlab.controller.DashboardController"
+            fitToWidth="true" hbarPolicy="NEVER" styleClass="content-scroll">
+    <VBox spacing="16" styleClass="dashboard-content">
+
+        <!-- Bandeau de bienvenue -->
+        <HBox fx:id="heroCard" styleClass="hero-card" alignment="CENTER_LEFT" spacing="28">
+            <VBox spacing="10" HBox.hgrow="ALWAYS">
+                <HBox spacing="10" alignment="BASELINE_LEFT">
+                    <Label text="Bienvenue de retour," styleClass="hero-title"/>
+                    <Label fx:id="welcomeName" text="Utilisateur" styleClass="hero-title-accent"/>
+                    <Label text="☆" styleClass="hero-title-accent"/>
+                </HBox>
+                <Label text="Votre parcours en cybersécurité continue. Aujourd'hui est une excellente journée pour apprendre quelque chose de nouveau !"
+                       styleClass="muted" wrapText="true"/>
+                <HBox spacing="26" alignment="CENTER_LEFT" styleClass="chips-row">
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="🏆" styleClass="chip-icon-gold"/>
+                        <Label fx:id="pointsLabel" text="0 points" styleClass="chip-text"/>
+                    </HBox>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="☆" styleClass="chip-icon-cyan"/>
+                        <Label fx:id="levelLabel" text="Novice" styleClass="chip-text"/>
+                    </HBox>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <Label text="🔥" styleClass="chip-icon-pink"/>
+                        <Label fx:id="streakLabel" text="0 jour d'affilée" styleClass="chip-text"/>
+                    </HBox>
+                </HBox>
+            </VBox>
+            <VBox spacing="10" alignment="CENTER" minWidth="-Infinity">
+                <Button text="▶   Commencer le défi  →" styleClass="cta-button" onAction="#goQuiz"/>
+                <Button text="🏆   Voir le classement" styleClass="cta-secondary" maxWidth="Infinity" onAction="#goLeaderboard"/>
+            </VBox>
+            <ImageView fx:id="heroArt" fitHeight="190" preserveRatio="true" smooth="true">
+                <image><Image url="@../images/hero_hacker.png"/></image>
+            </ImageView>
+        </HBox>
+
+        <!-- Statistiques -->
+        <HBox spacing="16">
+            <HBox styleClass="card" HBox.hgrow="ALWAYS" spacing="16" alignment="CENTER_LEFT">
+                <StackPane fx:id="ringHolder" minWidth="72" minHeight="72" prefWidth="72" prefHeight="72" maxWidth="72" maxHeight="72"/>
+                <VBox spacing="6" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <Label text="Progression globale" styleClass="muted-small"/>
+                    <Label fx:id="modulesDone" text="0 / 6 cours terminés" styleClass="stat-mid"/>
+                    <ProgressBar fx:id="progressBar" maxWidth="Infinity"/>
+                </VBox>
+                <VBox alignment="TOP_RIGHT">
+                    <StackPane fx:id="statIcon1" styleClass="icon-tile-small" minWidth="34" minHeight="34" prefWidth="34" prefHeight="34" maxWidth="34" maxHeight="34"/>
+                </VBox>
+            </HBox>
+            <HBox styleClass="card, card-violet" HBox.hgrow="ALWAYS" spacing="16" alignment="CENTER_LEFT">
+                <StackPane fx:id="starHolder" styleClass="icon-circle-violet" minWidth="64" minHeight="64" prefWidth="64" prefHeight="64" maxWidth="64" maxHeight="64"/>
+                <VBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <Label text="Score moyen" styleClass="muted-small"/>
+                    <Label fx:id="avgScoreLabel" text="0 %" styleClass="stat-value"/>
+                    <ProgressBar fx:id="avgScoreBar" styleClass="bar-violet" maxWidth="Infinity"/>
+                </VBox>
+                <VBox alignment="TOP_RIGHT">
+                    <StackPane fx:id="statIcon2" styleClass="icon-tile-violet" minWidth="34" minHeight="34" prefWidth="34" prefHeight="34" maxWidth="34" maxHeight="34"/>
+                </VBox>
+            </HBox>
+            <HBox styleClass="card" HBox.hgrow="ALWAYS" spacing="16" alignment="CENTER_LEFT">
+                <StackPane fx:id="rankIconHolder" styleClass="icon-circle" minWidth="64" minHeight="64" prefWidth="64" prefHeight="64" maxWidth="64" maxHeight="64"/>
+                <VBox spacing="3" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <Label text="Mon rang" styleClass="muted-small"/>
+                    <Label fx:id="rankLabel" text="-" styleClass="stat-value"/>
+                    <Label fx:id="rankNote" text="" styleClass="muted-small"/>
+                </VBox>
+                <VBox alignment="TOP_RIGHT">
+                    <StackPane fx:id="statIcon3" minWidth="26" minHeight="26" prefWidth="26" prefHeight="26" maxWidth="26" maxHeight="26"/>
+                </VBox>
+            </HBox>
+        </HBox>
+
+        <!-- Cours (2 à la fois) + colonne de droite -->
+        <HBox spacing="16" alignment="TOP_LEFT">
+            <VBox fx:id="coursesCard" styleClass="card" HBox.hgrow="ALWAYS" spacing="14">
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <StackPane fx:id="coursesIconHolder" minWidth="26" minHeight="26" prefWidth="26" prefHeight="26"/>
+                    <Label text="Cours disponibles" styleClass="section-title"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Button text="‹" styleClass="arrow-button" onAction="#previousCourses"/>
+                    <HBox fx:id="pageDots" spacing="6" alignment="CENTER"/>
+                    <Button text="›" styleClass="arrow-button" onAction="#nextCourses"/>
+                    <Button text="Voir tous →" styleClass="link-button" onAction="#goCourses"/>
+                </HBox>
+                <HBox fx:id="coursesPage" spacing="14" minHeight="330"/>
+            </VBox>
+
+            <VBox spacing="16" prefWidth="400" minWidth="400">
+                <VBox styleClass="card" spacing="12">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <StackPane fx:id="simsIconHolder" styleClass="icon-tile-small" minWidth="32" minHeight="32" prefWidth="32" prefHeight="32" maxWidth="32" maxHeight="32"/>
+                        <Label text="Simulations interactives" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Voir toutes →" styleClass="link-button" onAction="#goSimulations"/>
+                    </HBox>
+                    <HBox styleClass="sim-row-violet" alignment="CENTER_LEFT" spacing="14">
+                        <StackPane fx:id="phishIconHolder" minWidth="44" minHeight="44" prefWidth="44" prefHeight="44"/>
+                        <VBox HBox.hgrow="ALWAYS" spacing="2">
+                            <Label text="Détecteur de phishing" styleClass="card-title" wrapText="true"/>
+                            <Label text="Analysez un e-mail et détectez l'arnaque" styleClass="muted-small" wrapText="true"/>
+                        </VBox>
+                        <Button text="Lancer →" minWidth="-Infinity" styleClass="btn-violet" onAction="#goPhishing"/>
+                    </HBox>
+                    <HBox styleClass="sim-row-cyan" alignment="CENTER_LEFT" spacing="14">
+                        <StackPane fx:id="pwdIconHolder" minWidth="44" minHeight="44" prefWidth="44" prefHeight="44"/>
+                        <VBox HBox.hgrow="ALWAYS" spacing="2">
+                            <Label text="Test de mot de passe" styleClass="card-title" wrapText="true"/>
+                            <Label text="Vérifiez la robustesse de votre mot de passe" styleClass="muted-small" wrapText="true"/>
+                        </VBox>
+                        <Button text="Tester →" minWidth="-Infinity" styleClass="btn-cyan" onAction="#goPassword"/>
+                    </HBox>
+                </VBox>
+
+                <VBox styleClass="card" spacing="10">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <StackPane fx:id="rankingIconHolder" minWidth="26" minHeight="26" prefWidth="26" prefHeight="26"/>
+                        <Label text="Classement" styleClass="section-title"/>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <Button text="Voir plus →" styleClass="link-button" onAction="#goLeaderboard"/>
+                    </HBox>
+                    <VBox fx:id="leaderboardBox" spacing="4"/>
+                </VBox>
+            </VBox>
+        </HBox>
+    </VBox>
+</ScrollPane>
