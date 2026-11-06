@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Page de lecture d'un cours (M3) : sommaire des parties à gauche, texte à droite. -->
+<VBox spacing="16" styleClass="lrn-root" xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cyberlab.controller.CourseReaderController">
+    <stylesheets>
+        <URL value="@../css/learning.css"/>
+    </stylesheets>
+    <padding>
+        <Insets top="24" right="24" bottom="24" left="24"/>
+    </padding>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Button text="← Retour aux cours" onAction="#onBack" styleClass="lrn-btn-secondary"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="previousCourseButton" text="‹ Cours précédent" onAction="#onPreviousCourse"
+                styleClass="lrn-btn-secondary"/>
+        <Label fx:id="positionLabel" styleClass="lrn-muted"/>
+        <Button fx:id="nextCourseButton" text="Cours suivant ›" onAction="#onNextCourse"
+                styleClass="lrn-btn-secondary"/>
+    </HBox>
+
+    <Label fx:id="titleLabel" styleClass="lrn-title" wrapText="true"/>
+
+    <VBox styleClass="lrn-panel" spacing="8">
+        <Label fx:id="courseProgressLabel" styleClass="lrn-card-text"/>
+        <ProgressBar fx:id="courseProgressBar" progress="0" styleClass="lrn-progress" maxWidth="Infinity"/>
+    </VBox>
+
+    <HBox spacing="16" VBox.vgrow="ALWAYS">
+        <VBox styleClass="lrn-panel" prefWidth="330" minWidth="260" maxWidth="400" spacing="8">
+            <Label text="Sommaire" styleClass="lrn-card-title"/>
+            <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" styleClass="lrn-scroll"
+                        VBox.vgrow="ALWAYS">
+                <content>
+                    <VBox fx:id="tocBox" spacing="4"/>
+                </content>
+            </ScrollPane>
+        </VBox>
+
+        <VBox styleClass="lrn-panel" spacing="14" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+            <Label fx:id="partTitleLabel" styleClass="lrn-part-title" wrapText="true"/>
+            <ScrollPane fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" styleClass="lrn-scroll"
+                        VBox.vgrow="ALWAYS">
+                <content>
+                    <Label fx:id="partTextLabel" styleClass="lrn-part-text" wrapText="true" maxWidth="Infinity"/>
+                </content>
+            </ScrollPane>
+        </VBox>
+    </HBox>
+
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Button fx:id="previousPartButton" text="← Partie précédente" onAction="#onPreviousPart"
+                styleClass="lrn-btn-secondary"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="statusLabel" styleClass="lrn-muted"/>
+        <Button fx:id="completeButton" text="Partie terminée, suivante →" onAction="#onComplete"
+                styleClass="lrn-btn-primary"/>
+    </HBox>
+</VBox>

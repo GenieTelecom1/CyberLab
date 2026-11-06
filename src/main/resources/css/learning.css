@@ -1,0 +1,210 @@
+/* Style du module Learning (M3). Toutes les classes commencent par lrn- pour ne rien mélanger
+   avec le CSS global de M2.
+   Pour changer la couleur du thème (ex. rouge comme HackoSquad) : modifier -lrn-accent et -lrn-accent2. */
+
+.lrn-root {
+    -lrn-bg: #0b1020;
+    -lrn-card: #121a33;
+    -lrn-card-hover: #17224a;
+    -lrn-border: #25305a;
+    -lrn-accent: #3b82f6;
+    -lrn-accent2: #8b5cf6;
+    -lrn-text: #ffffff;
+    -lrn-muted: #94a3b8;
+    -lrn-success: #34d399;
+    -lrn-warning: #fbbf24;
+
+    -fx-background-color: -lrn-bg;
+    -fx-font-family: "Segoe UI", "Ubuntu", Arial, sans-serif;
+}
+
+.lrn-scroll,
+.lrn-scroll > .viewport {
+    -fx-background-color: transparent;
+}
+
+.lrn-scroll { -fx-padding: 0; }
+
+/* ----- Bannière et titres ----- */
+.lrn-banner {
+    -fx-background-color: linear-gradient(to right, #17224a, #1d1b4b);
+    -fx-background-radius: 16;
+    -fx-border-color: -lrn-border;
+    -fx-border-radius: 16;
+    -fx-padding: 24;
+}
+
+.lrn-title {
+    -fx-text-fill: -lrn-text;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.lrn-subtitle {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 14px;
+}
+
+.lrn-section-title {
+    -fx-text-fill: -lrn-text;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+/* ----- Cartes de statistiques ----- */
+.lrn-stat-card {
+    -fx-background-color: -lrn-card;
+    -fx-background-radius: 14;
+    -fx-border-color: -lrn-border;
+    -fx-border-radius: 14;
+    -fx-padding: 16 20 16 20;
+}
+
+.lrn-stat-value {
+    -fx-text-fill: -lrn-text;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.lrn-stat-label {
+    -fx-text-fill: -lrn-muted;
+    -fx-font-size: 13px;
+}
+
+/* ----- Cartes de cours ----- */
+.lrn-card {
+    -fx-background-color: -lrn-card;
+    -fx-background-radius: 14;
+    -fx-border-color: -lrn-border;
+    -fx-border-radius: 14;
+}
+
+.lrn-card:hover {
+    -fx-background-color: -lrn-card-hover;
+    -fx-border-color: -lrn-accent;
+}
+
+.lrn-card-number {
+    -fx-text-fill: -lrn-accent;
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+}
+
+.lrn-card-title {
+    -fx-text-fill: -lrn-text;
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+}
+
+.lrn-card-text {
+    -fx-text-fill: #cbd5e1;
+    -fx-font-size: 13px;
+}
+
+.lrn-muted {
+    -fx-text-fill: -lrn-muted;
+    -fx-font-size: 12px;
+}
+
+/* ----- Pills de statut ----- */
+.lrn-pill-todo,
+.lrn-pill-progress,
+.lrn-pill-done {
+    -fx-background-radius: 10;
+    -fx-padding: 3 10 3 10;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+}
+
+.lrn-pill-todo { -fx-background-color: #1f2a4a; -fx-text-fill: -lrn-muted; }
+.lrn-pill-progress { -fx-background-color: #3b2f0b; -fx-text-fill: -lrn-warning; }
+.lrn-pill-done { -fx-background-color: #0b3b2e; -fx-text-fill: -lrn-success; }
+
+/* ----- Barres de progression ----- */
+.lrn-progress {
+    -fx-pref-height: 10px;
+    -fx-max-width: infinity;
+}
+
+.lrn-progress > .track {
+    -fx-background-color: #1f2a4a;
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
+}
+
+.lrn-progress > .bar {
+    -fx-background-color: linear-gradient(to right, -lrn-accent, -lrn-accent2);
+    -fx-background-radius: 5;
+    -fx-background-insets: 0;
+    -fx-padding: 5px;
+}
+
+/* ----- Boutons ----- */
+.lrn-btn-primary {
+    -fx-background-color: linear-gradient(to right, -lrn-accent, -lrn-accent2);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10;
+    -fx-padding: 8 18 8 18;
+    -fx-cursor: hand;
+}
+
+.lrn-btn-primary:hover { -fx-opacity: 0.9; }
+.lrn-btn-primary:disabled { -fx-opacity: 0.45; }
+
+.lrn-btn-secondary {
+    -fx-background-color: transparent;
+    -fx-text-fill: #93c5fd;
+    -fx-border-color: -lrn-border;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8 16 8 16;
+    -fx-cursor: hand;
+}
+
+.lrn-btn-secondary:hover { -fx-border-color: -lrn-accent; }
+.lrn-btn-secondary:disabled { -fx-opacity: 0.35; }
+
+/* ----- Page de lecture ----- */
+.lrn-panel {
+    -fx-background-color: -lrn-card;
+    -fx-background-radius: 14;
+    -fx-border-color: -lrn-border;
+    -fx-border-radius: 14;
+    -fx-padding: 18;
+}
+
+.lrn-part-title {
+    -fx-text-fill: -lrn-text;
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+}
+
+.lrn-part-text {
+    -fx-text-fill: #e2e8f0;
+    -fx-font-size: 17px;
+    -fx-line-spacing: 7;
+}
+
+.lrn-toc-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: #cbd5e1;
+    -fx-background-radius: 10;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 9 12 9 12;
+    -fx-cursor: hand;
+    -fx-max-width: infinity;
+}
+
+.lrn-toc-item:hover { -fx-background-color: -lrn-card-hover; }
+.lrn-toc-item:disabled { -fx-opacity: 0.4; -fx-cursor: default; }
+
+.lrn-toc-done { -fx-text-fill: -lrn-success; }
+
+.lrn-toc-current {
+    -fx-background-color: #1d2a5c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-border-color: -lrn-accent;
+    -fx-border-radius: 10;
+}

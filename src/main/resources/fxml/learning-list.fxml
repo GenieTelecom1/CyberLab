@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<!-- Liste des cours (M3). Style : /css/learning.css (classes lrn-*). -->
+<StackPane fx:id="contentArea" styleClass="lrn-root" xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cyberlab.controller.CourseController">
+    <stylesheets>
+        <URL value="@../css/learning.css"/>
+    </stylesheets>
+
+    <ScrollPane fx:id="listView" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER" styleClass="lrn-scroll">
+        <content>
+            <VBox spacing="20" styleClass="lrn-root">
+                <padding>
+                    <Insets top="24" right="24" bottom="24" left="24"/>
+                </padding>
+
+                <VBox styleClass="lrn-banner" spacing="8">
+                    <Label text="Learning" styleClass="lrn-title"/>
+                    <Label text="Apprends les bases de la cybersécurité, partie par partie."
+                           styleClass="lrn-subtitle"/>
+                    <ProgressBar fx:id="progressBar" progress="0" styleClass="lrn-progress" maxWidth="Infinity"/>
+                    <Label fx:id="progressLabel" styleClass="lrn-subtitle"/>
+                </VBox>
+
+                <HBox spacing="18">
+                    <VBox styleClass="lrn-stat-card" spacing="4" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                        <Label fx:id="statCoursesValue" text="0 / 6" styleClass="lrn-stat-value"/>
+                        <Label text="Cours terminés" styleClass="lrn-stat-label"/>
+                    </VBox>
+                    <VBox styleClass="lrn-stat-card" spacing="4" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                        <Label fx:id="statPartsValue" text="0 / 0" styleClass="lrn-stat-value"/>
+                        <Label text="Parties terminées" styleClass="lrn-stat-label"/>
+                    </VBox>
+                    <VBox styleClass="lrn-stat-card" spacing="4" HBox.hgrow="ALWAYS" maxWidth="Infinity">
+                        <Label fx:id="statInProgressValue" text="0" styleClass="lrn-stat-value"/>
+                        <Label text="Cours en cours" styleClass="lrn-stat-label"/>
+                    </VBox>
+                </HBox>
+
+                <Label text="Mes cours" styleClass="lrn-section-title"/>
+                <FlowPane fx:id="cardsPane" hgap="18" vgap="18"/>
+            </VBox>
+        </content>
+    </ScrollPane>
+</StackPane>
