@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.cyberlab.controller.CourseController"
+            style="-fx-background-color: #0b1120;">
+
+    <left>
+        <VBox prefWidth="280" spacing="15"
+              style="-fx-background-color: #111827;"
+              BorderPane.alignment="CENTER">
+
+            <padding>
+                <Insets top="20" right="15" bottom="20" left="15"/>
+            </padding>
+
+            <Label text="📚 Liste des cours"
+                   style="-fx-text-fill: #00d9ff; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+            <ListView fx:id="courseList"
+                      VBox.vgrow="ALWAYS"
+                      style="-fx-background-color: #111827;"/>
+
+            <Label text="Votre progression"
+                   style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+
+            <ProgressBar fx:id="progressBar"
+                         prefWidth="250"
+                         progress="0"/>
+
+            <Label fx:id="progressLabel"
+                   text="0 / 0 cours terminés"
+                   style="-fx-text-fill: white;"/>
+
+        </VBox>
+    </left>
+
+    <center>
+        <VBox spacing="15">
+            <padding>
+                <Insets top="25" right="25" bottom="20" left="25"/>
+            </padding>
+
+            <Label fx:id="titleLabel"
+                   text="Sélectionnez un cours"
+                   style="-fx-text-fill: #00d9ff; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+            <WebView fx:id="contentView"
+                     VBox.vgrow="ALWAYS"/>
+
+            <Label fx:id="statusLabel"
+                   text=""
+                   style="-fx-text-fill: #00d9ff;"/>
+
+            <HBox spacing="12" alignment="CENTER_RIGHT">
+
+                <Button fx:id="prevButton"
+                        text="← Précédent"
+                        onAction="#onPrevious"/>
+
+                <Button fx:id="completeButton"
+                        text="Marquer comme terminé"
+                        onAction="#onComplete"/>
+
+                <Button fx:id="nextButton"
+                        text="Suivant →"
+                        onAction="#onNext"/>
+
+            </HBox>
+
+        </VBox>
+    </center>
+
+</BorderPane>

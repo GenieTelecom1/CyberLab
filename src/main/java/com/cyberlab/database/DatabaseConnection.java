@@ -69,4 +69,10 @@ public final class DatabaseConnection {
             dataSource = null;
         }
     }
+    /**
+     * Id utilisateur temporaire en mode développement.
+     */
+    public static int devUserId() {
+        return 1;
+    }
 }
