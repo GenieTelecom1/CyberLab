@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Panneau de gauche commun à tous les écrans d'authentification (inclus avec fx:include) -->
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="auth-hero" alignment="CENTER_LEFT" spacing="22"
+      prefWidth="480" minWidth="380" HBox.hgrow="NEVER">
+    <StackPane styleClass="hero-icon-wrap" maxWidth="-Infinity" maxHeight="-Infinity">
+        <Region styleClass="icon-shield"/>
+        <VBox alignment="CENTER" maxWidth="-Infinity" maxHeight="-Infinity" translateY="4">
+            <Region styleClass="lock-shackle"/>
+            <Region styleClass="lock-body"/>
+        </VBox>
+    </StackPane>
+    <VBox spacing="4">
+        <Label text="CyberLab" styleClass="brand-title"/>
+        <Label text="APPRENDRE. PRATIQUER. PROTÉGER." styleClass="brand-slogan"/>
+    </VBox>
+    <Label text="Maîtrisez les bases de la cybersécurité grâce à des cours, des quiz et des simulations interactives."
+           styleClass="hero-text" wrapText="true"/>
+    <VBox spacing="12">
+        <HBox spacing="12" styleClass="feature-row">
+            <Region styleClass="icon-check"/>
+            <Label text="6 cours sur les fondamentaux de la cybersécurité" styleClass="feature-text"/>
+        </HBox>
+        <HBox spacing="12" styleClass="feature-row">
+            <Region styleClass="icon-check"/>
+            <Label text="Quiz avec correction immédiate" styleClass="feature-text"/>
+        </HBox>
+        <HBox spacing="12" styleClass="feature-row">
+            <Region styleClass="icon-check"/>
+            <Label text="Détecteur de phishing et test de mot de passe" styleClass="feature-text"/>
+        </HBox>
+        <HBox spacing="12" styleClass="feature-row">
+            <Region styleClass="icon-check"/>
+            <Label text="Suivi de progression et classement" styleClass="feature-text"/>
+        </HBox>
+    </VBox>
+</VBox>

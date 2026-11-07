@@ -1,11 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<VBox alignment="CENTER" spacing="12" styleClass="auth-card" maxWidth="380" xmlns:fx="http://javafx.com/fxml" fx:controller="com.cyberlab.controller.LoginController">
-<Label text="Connexion" styleClass="title"/>
-<TextField fx:id="emailField" promptText="E-mail"/>
-<PasswordField fx:id="passwordField" promptText="Mot de passe" onAction="#onLogin"/>
-<Label fx:id="errorLabel" styleClass="error-label" wrapText="true"/>
-<Button fx:id="loginButton" text="Se connecter" onAction="#onLogin" defaultButton="true"/>
-<Hyperlink text="Créer un compte" onAction="#onGoToSignUp"/>
-</VBox>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="auth-root" fx:controller="com.cyberlab.controller.LoginController">
+    <stylesheets>
+        <URL value="@../css/auth.css"/>
+    </stylesheets>
+
+    <fx:include source="auth-hero.fxml"/>
+
+    <ScrollPane HBox.hgrow="ALWAYS" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER"
+                styleClass="auth-scroll">
+        <StackPane styleClass="auth-right">
+            <VBox styleClass="auth-card" prefWidth="440" maxWidth="440" maxHeight="-Infinity" spacing="16">
+                <Label text="Bon retour" styleClass="auth-title"/>
+                <Label text="Connectez-vous pour continuer votre parcours." styleClass="auth-subtitle" wrapText="true"/>
+
+                <Label fx:id="successLabel" styleClass="success-label" maxWidth="Infinity" wrapText="true"/>
+                <Label fx:id="errorLabel" styleClass="error-label" maxWidth="Infinity" wrapText="true"/>
+
+                <VBox spacing="6">
+                    <Label text="E-mail" styleClass="field-label"/>
+                    <TextField fx:id="emailField" promptText="vous@exemple.com" styleClass="auth-field"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Mot de passe" styleClass="field-label"/>
+                    <StackPane alignment="CENTER_RIGHT">
+                        <PasswordField fx:id="passwordField" promptText="Votre mot de passe"
+                                       styleClass="auth-field, has-reveal" onAction="#onLogin"/>
+                        <TextField fx:id="passwordVisible" promptText="Votre mot de passe"
+                                   styleClass="auth-field, has-reveal" onAction="#onLogin"/>
+                        <Button fx:id="togglePassword" text="Afficher" styleClass="btn-reveal"
+                                focusTraversable="false" StackPane.alignment="CENTER_RIGHT">
+                            <StackPane.margin>
+                                <Insets right="6"/>
+                            </StackPane.margin>
+                        </Button>
+                    </StackPane>
+                    <HBox alignment="CENTER_RIGHT">
+                        <Hyperlink text="Mot de passe oublié ?" styleClass="auth-link" onAction="#onForgot"/>
+                    </HBox>
+                </VBox>
+
+                <Button fx:id="loginButton" text="Se connecter" styleClass="btn-primary"
+                        maxWidth="Infinity" defaultButton="true" onAction="#onLogin"/>
+
+                <HBox alignment="CENTER" spacing="10">
+                    <Region styleClass="divider" HBox.hgrow="ALWAYS"/>
+                    <Label text="Nouveau sur CyberLab ?" styleClass="divider-text"/>
+                    <Region styleClass="divider" HBox.hgrow="ALWAYS"/>
+                </HBox>
+
+                <Button text="Créer un compte" styleClass="btn-secondary" maxWidth="Infinity"
+                        onAction="#onGoToRegister"/>
+            </VBox>
+        </StackPane>
+    </ScrollPane>
+</HBox>

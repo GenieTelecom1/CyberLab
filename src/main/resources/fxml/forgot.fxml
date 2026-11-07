@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="auth-root" fx:controller="com.cyberlab.controller.ForgotPasswordController">
+    <stylesheets>
+        <URL value="@../css/auth.css"/>
+    </stylesheets>
+
+    <fx:include source="auth-hero.fxml"/>
+
+    <ScrollPane HBox.hgrow="ALWAYS" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER"
+                styleClass="auth-scroll">
+        <StackPane styleClass="auth-right">
+            <VBox styleClass="auth-card" prefWidth="440" maxWidth="440" maxHeight="-Infinity" spacing="16">
+                <HBox>
+                    <Label text="MOT DE PASSE OUBLIÉ" styleClass="badge"/>
+                </HBox>
+                <Label text="Réinitialiser le mot de passe" styleClass="auth-title" wrapText="true"/>
+                <Label text="Saisissez l'adresse e-mail de votre compte : nous vous enverrons un code à 6 chiffres."
+                       styleClass="auth-subtitle" wrapText="true"/>
+
+                <Label fx:id="errorLabel" styleClass="error-label" maxWidth="Infinity" wrapText="true"/>
+
+                <VBox spacing="6">
+                    <Label text="E-mail" styleClass="field-label"/>
+                    <TextField fx:id="emailField" promptText="vous@exemple.com" styleClass="auth-field"
+                               onAction="#onSend"/>
+                </VBox>
+
+                <Button fx:id="sendButton" text="Envoyer le code" styleClass="btn-primary"
+                        maxWidth="Infinity" defaultButton="true" onAction="#onSend"/>
+
+                <HBox alignment="CENTER">
+                    <Hyperlink text="Retour à la connexion" styleClass="auth-link" onAction="#onBack"/>
+                </HBox>
+            </VBox>
+        </StackPane>
+    </ScrollPane>
+</HBox>

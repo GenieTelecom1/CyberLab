@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -37,6 +38,26 @@ public final class SceneManager {
         stage.setTitle("CyberLab");
         stage.setMinWidth(1000);
         stage.setMinHeight(650);
+    }
+
+    /** Écrans accessibles sans être connecté (authentification). */
+    private static final Set<String> ECRANS_PUBLICS =
+            Set.of("login", "signup", "register", "verify", "forgot", "reset");
+
+    /**
+     * Point d'entrée de navigation utilisé par les écrans d'authentification (Membre 1).
+     * Contrôle d'accès (J8) : personne de connecté => retour à « login » pour tout écran protégé.
+     */
+    public static void switchTo(String nom) {
+        if (!ECRANS_PUBLICS.contains(nom) && !SessionManager.isLoggedIn()) {
+            showScene("login");
+        } else if (ECRANS_PUBLICS.contains(nom)) {
+            showScene(nom);
+        } else if ("dashboard".equals(nom)) {
+            showShell();
+        } else {
+            navigateTo(nom);
+        }
     }
 
     /** Écran autonome (login, register) : change toute la scène. */

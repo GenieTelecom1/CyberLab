@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      styleClass="auth-root" fx:controller="com.cyberlab.controller.RegisterController">
+    <stylesheets>
+        <URL value="@../css/auth.css"/>
+    </stylesheets>
+
+    <fx:include source="auth-hero.fxml"/>
+
+    <ScrollPane HBox.hgrow="ALWAYS" fitToWidth="true" fitToHeight="true" hbarPolicy="NEVER"
+                styleClass="auth-scroll">
+        <StackPane styleClass="auth-right">
+            <VBox styleClass="auth-card" prefWidth="440" maxWidth="440" maxHeight="-Infinity" spacing="14">
+                <Label text="Créer un compte" styleClass="auth-title"/>
+                <Label text="Rejoignez CyberLab et commencez à vous entraîner." styleClass="auth-subtitle" wrapText="true"/>
+
+                <Label fx:id="errorLabel" styleClass="error-label" maxWidth="Infinity" wrapText="true"/>
+
+                <VBox spacing="6">
+                    <Label text="Nom" styleClass="field-label"/>
+                    <TextField fx:id="nomField" promptText="Votre nom" styleClass="auth-field"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="E-mail" styleClass="field-label"/>
+                    <TextField fx:id="emailField" promptText="vous@exemple.com" styleClass="auth-field"/>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Mot de passe" styleClass="field-label"/>
+                    <StackPane alignment="CENTER_RIGHT">
+                        <PasswordField fx:id="passwordField" promptText="8 caractères minimum"
+                                       styleClass="auth-field, has-reveal"/>
+                        <TextField fx:id="passwordVisible" promptText="8 caractères minimum"
+                                   styleClass="auth-field, has-reveal"/>
+                        <Button fx:id="togglePassword" text="Afficher" styleClass="btn-reveal"
+                                focusTraversable="false" StackPane.alignment="CENTER_RIGHT">
+                            <StackPane.margin>
+                                <Insets right="6"/>
+                            </StackPane.margin>
+                        </Button>
+                    </StackPane>
+                    <ProgressBar fx:id="strengthBar" progress="0" maxWidth="Infinity" styleClass="strength-bar"/>
+                    <HBox alignment="CENTER_LEFT" spacing="8">
+                        <Label fx:id="strengthLabel" styleClass="strength-label"/>
+                        <Label text="Une lettre et un chiffre au minimum." styleClass="field-hint"/>
+                    </HBox>
+                </VBox>
+
+                <VBox spacing="6">
+                    <Label text="Confirmer le mot de passe" styleClass="field-label"/>
+                    <PasswordField fx:id="confirmField" promptText="Retapez le mot de passe"
+                                   styleClass="auth-field" onAction="#onRegister"/>
+                </VBox>
+
+                <Button fx:id="registerButton" text="Créer mon compte" styleClass="btn-primary"
+                        maxWidth="Infinity" defaultButton="true" onAction="#onRegister"/>
+
+                <HBox alignment="CENTER" spacing="4">
+                    <Label text="Déjà un compte ?" styleClass="divider-text"/>
+                    <Hyperlink text="Se connecter" styleClass="auth-link" onAction="#onGoToLogin"/>
+                </HBox>
+            </VBox>
+        </StackPane>
+    </ScrollPane>
+</HBox>
