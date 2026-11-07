@@ -11,19 +11,39 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- CHANGE : Java 21 (records, var...) au lieu de Java 8 -->
+        <maven.compiler.release>21</maven.compiler.release>
         <junit.version>5.12.1</junit.version>
+        <javafx.version>21.0.6</javafx.version>
+        <!-- AJOUT : versions des nouvelles bibliothèques -->
+        <jackson.version>2.22.4</jackson.version>
+        <postgresql.version>42.6.0</postgresql.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>21.0.6</version>
+            <version>${javafx.version}</version>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>21.0.6</version>
+            <version>${javafx.version}</version>
+        </dependency>
+
+        <!-- AJOUT : traitement JSON -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!-- AJOUT : pilote JDBC PostgreSQL pour Supabase -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
         </dependency>
 
         <dependency>
@@ -45,31 +65,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.13.0</version>
+                <version>3.14.1</version>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <!-- CHANGE : release 21 à la place de source 8 / target 8 -->
+                    <release>21</release>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
-                <executions>
-                    <execution>
-                        <!-- Default configuration for running with: mvn clean javafx:run -->
-                        <id>default-cli</id>
-                        <configuration>
-                            <mainClass>com.example.demo1/com.example.demo1.HelloApplication</mainClass>
-                            <launcher>app</launcher>
-                            <jlinkZipName>app</jlinkZipName>
-                            <jlinkImageName>app</jlinkImageName>
-                            <noManPages>true</noManPages>
-                            <stripDebug>true</stripDebug>
-                            <noHeaderFiles>true</noHeaderFiles>
-                        </configuration>
-                    </execution>
-                </executions>
+                <configuration>
+                    <!-- A VERIFIER : remplacer par la vraie classe qui contient "extends Application" -->
+                    <mainClass>com.cyberlab.Main</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
