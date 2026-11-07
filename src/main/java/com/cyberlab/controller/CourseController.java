@@ -5,6 +5,8 @@ import com.cyberlab.service.CourseService;
 import com.cyberlab.database.DatabaseConnection;
 import com.cyberlab.service.ProgressService;
 import com.cyberlab.util.MarkdownRenderer;
+import com.cyberlab.util.SceneManager;
+import com.cyberlab.util.SessionManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
@@ -14,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
 
 import java.util.HashSet;
@@ -37,6 +40,9 @@ public class CourseController {
     @FXML private Button nextButton;
     @FXML private Button completeButton;
 
+    /** Bouton créé en code : lance le quiz du cours sélectionné. */
+    private Button quizButton;
+
     private final CourseService courseService = new CourseService();
     private final ProgressService progressService = new ProgressService();
 
@@ -46,8 +52,14 @@ public class CourseController {
 
     @FXML
     private void initialize() {
-        // TODO membre 1 : remplacer par l'id de l'utilisateur connecte (session du Login).
-        userId = DatabaseConnection.devUserId();
+        // Utilisateur réellement connecté (le même que celui du quiz / classement / historique)
+        userId = SessionManager.getCurrentUserId();
+
+        quizButton = new Button("Passer le quiz →");
+        quizButton.getStyleClass().add("btn-cyan");
+        quizButton.setOnAction(e -> onQuiz());
+        quizButton.setDisable(true);
+        ((Pane) completeButton.getParent()).getChildren().add(quizButton);
 
         courseList.setCellFactory(lv -> new ListCell<>() {
             @Override
@@ -129,6 +141,16 @@ public class CourseController {
         }
     }
 
+    /** Ouvre le quiz du cours sélectionné (le QuizController lit pendingCourseId). */
+    private void onQuiz() {
+        Course course = courseList.getSelectionModel().getSelectedItem();
+        if (course == null) {
+            return;
+        }
+        QuizController.pendingCourseId = course.getId();
+        SceneManager.navigateTo("quiz");
+    }
+
     @FXML
     private void onComplete() {
         Course course = courseList.getSelectionModel().getSelectedItem();
@@ -169,6 +191,7 @@ public class CourseController {
         boolean done = course != null && completedIds.contains(course.getId());
         completeButton.setDisable(course == null || done);
         completeButton.setText(done ? "✓ Cours terminé" : "Marquer comme terminé");
+        quizButton.setDisable(course == null);
     }
 
     private void refreshProgress() {

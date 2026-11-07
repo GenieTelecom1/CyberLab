@@ -5,6 +5,7 @@ import com.cyberlab.database.DatabaseConnection;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,7 @@ public class QuizService {
         questionsCourantes = toutesLesQuestions.stream()
                 .filter(q -> q.getCourseId() == courseId)
                 .collect(Collectors.toList());
+        Collections.shuffle(questionsCourantes);   // ordre aléatoire à chaque partie
         currentIndex = 0;
         score = 0;
     }
@@ -100,6 +102,7 @@ public class QuizService {
     }
 
     public void resetQuiz() {
+        Collections.shuffle(questionsCourantes);   // nouvel ordre quand on recommence
         currentIndex = 0;
         score = 0;
     }

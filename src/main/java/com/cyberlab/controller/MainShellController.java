@@ -31,6 +31,7 @@ public class MainShellController {
         navButtons.put("phishing_simulation", navSimulations);
         navButtons.put("leaderboard", navLeaderboard);
         navButtons.put("chatbot", navChatbot);
+        titles.put("history", "Historique");
 
         setIcon(navDashboard, Icons.HOME);
         setIcon(navCourses, Icons.BOOK_OPEN);

@@ -1,17 +1,28 @@
 package com.cyberlab.service;
 
+import com.cyberlab.database.DatabaseConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
- * Propriétaire : Membre 2 (statistiques générales du Dashboard).
+ * Statistiques du Dashboard, calculées à partir des vraies données Supabase :
+ *   - courses / progress     : liste des cours et cours terminés
+ *   - quiz_results           : scores, moyenne, points, rang, série de jours
  *
- * J6 : renvoie des DONNÉES DE TEST.
- * J8 / regroupement : remplacer le contenu de getSnapshot() par des appels aux services des autres
- * membres (le contrôleur n'a pas à changer) :
- *   - cours + terminé ?          -> CourseService / ProgressService (M3)
- *   - % de progression           -> ProgressService.calculateProgressPercentage(userId)
- *   - score moyen, rang, top 3   -> QuizService.getLeaderboard() / getUserScoreHistory(userId) (M4)
- * Règle d'arrondi (cf. MAQUETTES.md) : pourcentage arrondi à l'entier le plus proche.
+ * Points = somme, sur chaque cours, du meilleur score de l'utilisateur
+ * (c'est le même calcul que la page « Classement »).
+ * Niveau : Novice (0-9), Intermédiaire (10-24), Avancé (25-39), Expert (40+).
  */
 public class DashboardService {
 
@@ -31,30 +42,151 @@ public class DashboardService {
         }
     }
 
+    private static final ZoneId TUNIS = ZoneId.of("Africa/Tunis");
+
+    public static String levelFor(int points) {
+        if (points >= 40) return "Expert";
+        if (points >= 25) return "Avancé";
+        if (points >= 10) return "Intermédiaire";
+        return "Novice";
+    }
+
     public DashboardSnapshot getSnapshot(int userId) {
-        // TODO regroupement : remplacer par les vrais services (voir en-tête)
-        return new DashboardSnapshot(
-                List.of(
-                        new CourseSummary(1, "Introduction à la cybersécurité",
-                                "Découvrez les bases de la sécurité informatique.", 1.00, true),
-                        new CourseSummary(2, "Hameçonnage (phishing)",
-                                "Apprenez à reconnaître les tentatives de phishing.", 1.00, true),
-                        new CourseSummary(3, "Logiciels malveillants",
-                                "Comprenez virus, chevaux de Troie et ransomware.", 0.20, false),
-                        new CourseSummary(4, "Ingénierie sociale",
-                                "Découvrez les techniques de manipulation des attaquants.", 0.64, false),
-                        new CourseSummary(5, "Sécurité des réseaux",
-                                "Protégez vos réseaux avec pare-feu et VPN.", 0.35, false),
-                        new CourseSummary(6, "Sécurité des mots de passe",
-                                "Créez et gérez des mots de passe sécurisés.", 0.0, false)),
-                0.78,
-                "#42",
-                "Top 15 % cette semaine",
-                List.of(new RankEntry(1, "Hacker", "Novice", 1250),
-                        new RankEntry(2, "Navi", "Novice", 1120),
-                        new RankEntry(3, "CyberHero", "Novice", 980)),
-                // TODO : points / niveau / série / tendance ne sont pas définis dans le cahier des charges
-                // (formule à valider avec M4 et l'équipe). Valeurs de test pour la maquette.
-                6, "Novice", 7);
+        List<CourseSummary> courses = new ArrayList<>();
+        double average = 0;
+        int points = 0;
+        String rank = "—";
+        String rankNote = "Passez un quiz pour être classé";
+        List<RankEntry> top = new ArrayList<>();
+        int streak = 0;
+
+        try (Connection c = DatabaseConnection.getConnection()) {
+            courses = loadCourses(c, userId);
+            average = loadAverage(c, userId);
+            streak = loadStreak(c, userId);
+
+            // Classement global (somme des meilleurs scores par cours)
+            String sql = "SELECT user_id, username, SUM(best) AS total FROM ("
+                    + "  SELECT user_id, username, course_id, MAX(score) AS best "
+                    + "  FROM quiz_results GROUP BY user_id, username, course_id"
+                    + ") t GROUP BY user_id, username ORDER BY total DESC, username ASC";
+            try (Statement st = c.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+                int position = 1;
+                int participants = 0;
+                int myPosition = -1;
+                while (rs.next()) {
+                    int total = rs.getInt("total");
+                    if (position <= 3) {
+                        top.add(new RankEntry(position, rs.getString("username"), levelFor(total), total));
+                    }
+                    if (rs.getInt("user_id") == userId) {
+                        myPosition = position;
+                        points = total;
+                    }
+                    position++;
+                    participants++;
+                }
+                if (myPosition > 0) {
+                    rank = "#" + myPosition;
+                    rankNote = "Sur " + participants + (participants > 1 ? " participants" : " participant");
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur Dashboard : " + e.getMessage());
+        }
+
+        return new DashboardSnapshot(courses, average, rank, rankNote, top, points, levelFor(points), streak);
+    }
+
+    // ---------- cours + progression ----------
+
+    private List<CourseSummary> loadCourses(Connection c, int userId) {
+        List<CourseSummary> list = new ArrayList<>();
+
+        Set<Integer> completed = new HashSet<>();
+        try (PreparedStatement ps = c.prepareStatement(
+                "SELECT course_id FROM progress WHERE user_id = ? AND termine = TRUE")) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) completed.add(rs.getInt(1));
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur progression : " + e.getMessage());
+        }
+
+        // Meilleur résultat de quiz par cours (0..1)
+        Map<Integer, Double> bestRatio = new HashMap<>();
+        try (PreparedStatement ps = c.prepareStatement(
+                "SELECT course_id, MAX(score * 1.0 / NULLIF(total, 0)) FROM quiz_results "
+                        + "WHERE user_id = ? GROUP BY course_id")) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) bestRatio.put(rs.getInt(1), rs.getDouble(2));
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur meilleurs scores : " + e.getMessage());
+        }
+
+        try (Statement st = c.createStatement();
+             ResultSet rs = st.executeQuery("SELECT id, titre, description FROM courses ORDER BY ordre")) {
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                boolean done = completed.contains(id);
+                double progress = done ? 1.0 : Math.min(bestRatio.getOrDefault(id, 0.0), 0.99);
+                String desc = rs.getString("description");
+                list.add(new CourseSummary(id, rs.getString("titre"), desc == null ? "" : desc, progress, done));
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur liste des cours : " + e.getMessage());
+        }
+        return list;
+    }
+
+    // ---------- score moyen (0..1) ----------
+
+    private double loadAverage(Connection c, int userId) {
+        try (PreparedStatement ps = c.prepareStatement(
+                "SELECT AVG(score * 1.0 / NULLIF(total, 0)) FROM quiz_results WHERE user_id = ?")) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getDouble(1);   // 0 si aucun quiz (NULL)
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur score moyen : " + e.getMessage());
+        }
+        return 0;
+    }
+
+    // ---------- série de jours consécutifs avec au moins un quiz ----------
+
+    private int loadStreak(Connection c, int userId) {
+        String sql = "SELECT DISTINCT (played_at AT TIME ZONE 'Africa/Tunis')::date AS d "
+                + "FROM quiz_results WHERE user_id = ? ORDER BY d DESC";
+        try (PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                LocalDate expected = LocalDate.now(TUNIS);
+                int streak = 0;
+                boolean first = true;
+                while (rs.next()) {
+                    LocalDate day = rs.getDate("d").toLocalDate();
+                    if (first) {
+                        first = false;
+                        // la série est encore active si le dernier quiz date d'aujourd'hui ou d'hier
+                        if (day.equals(expected.minusDays(1))) expected = expected.minusDays(1);
+                    }
+                    if (day.equals(expected)) {
+                        streak++;
+                        expected = expected.minusDays(1);
+                    } else {
+                        break;
+                    }
+                }
+                return streak;
+            }
+        } catch (Exception e) {
+            System.err.println("Erreur série de jours : " + e.getMessage());
+            return 0;
+        }
     }
 }
