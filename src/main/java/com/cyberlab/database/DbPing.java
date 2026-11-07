@@ -13,7 +13,10 @@ public class DbPing {
             rs.next();
             System.out.println("Connexion OK. Tables dans le schéma public : " + rs.getInt(1));
         } catch (Exception e) {
-            System.out.println("Echec de la connexion : " + e.getMessage());
+            System.out.println("Echec de la connexion :");
+            for (Throwable t = e; t != null; t = t.getCause()) {
+                System.out.println("  -> " + t.getClass().getSimpleName() + " : " + t.getMessage());
+            }
         } finally {
             DatabaseConnection.close();
         }
