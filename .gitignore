@@ -16,3 +16,5 @@ build/
 
 # Secrets (ne jamais envoyer sur Git)
 db.properties
+config.properties
+.envconfig.properties
