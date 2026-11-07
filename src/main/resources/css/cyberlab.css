@@ -416,3 +416,23 @@
 .text-area .scroll-pane { -fx-background-color: transparent; }
 .text-area .viewport { -fx-background-color: #0f1729; }
 .btn-cyan:disabled, .btn-violet:disabled { -fx-opacity: 0.5; }
+.btn-login {
+    -fx-background-color: transparent;
+    -fx-border-color: #00e5ff;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #00e5ff;
+    -fx-padding: 8px 18px;
+    -fx-cursor: hand;
+}
+.btn-login:hover { -fx-background-color: rgba(0, 229, 255, 0.12); }
+
+.btn-signup {
+    -fx-background-color: #22c55e;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #0b0f19;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 18px;
+    -fx-cursor: hand;
+}
+.btn-signup:hover { -fx-background-color: #16a34a; }
