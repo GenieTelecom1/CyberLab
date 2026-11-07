@@ -1,0 +1,231 @@
+/* =============================================================================
+   CyberLab Assistant - Cybersecurity Dark & Neon Theme
+   ============================================================================= */
+
+/* Root Pane Background */
+.root-pane {
+    -fx-background-color: #0b0f19;
+    -fx-font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+}
+
+/* =============================================================================
+   Header Bar
+   ============================================================================= */
+.header-bar {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #1e293b;
+    -fx-border-width: 0 0 1px 0;
+    -fx-padding: 14px 20px 14px 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 3);
+}
+
+.header-icon {
+    -fx-font-size: 26px;
+}
+
+.header-title {
+    -fx-font-size: 19px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #38bdf8;
+    -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.35), 4, 0, 0, 0);
+}
+
+.header-subtitle {
+    -fx-font-size: 12px;
+    -fx-text-fill: #94a3b8;
+}
+
+/* Status Chip */
+.status-chip {
+    -fx-background-color: #1e293b;
+    -fx-background-radius: 20px;
+    -fx-border-color: #334155;
+    -fx-border-radius: 20px;
+    -fx-padding: 4px 12px 4px 10px;
+}
+
+.status-dot {
+    -fx-font-size: 10px;
+    -fx-text-fill: #10b981; /* Green default */
+}
+
+.status-dot-offline {
+    -fx-text-fill: #f59e0b; /* Amber */
+}
+
+.status-text {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #cbd5e1;
+}
+
+/* =============================================================================
+   Chat Scroll Pane & Message Area
+   ============================================================================= */
+.chat-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: #0b0f19;
+    -fx-border-color: transparent;
+}
+
+.chat-scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.chat-container {
+    -fx-background-color: transparent;
+}
+
+/* ScrollBar Styling */
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 8px;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #334155;
+    -fx-background-radius: 4px;
+}
+
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: #0ea5e9;
+}
+
+.scroll-bar:vertical .track,
+.scroll-bar:vertical .track-background,
+.scroll-bar:vertical .increment-button,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+/* =============================================================================
+   Message Bubble Cards & Wrappers
+   ============================================================================= */
+.message-row-user {
+    -fx-alignment: center-right;
+}
+
+.message-row-assistant {
+    -fx-alignment: center-left;
+}
+
+/* User Bubble: Vibrant Cyber Blue */
+.user-bubble {
+    -fx-background-color: linear-gradient(to bottom right, #2563eb, #1d4ed8);
+    -fx-background-radius: 16px 16px 2px 16px;
+    -fx-padding: 12px 16px;
+    -fx-effect: dropshadow(gaussian, rgba(37, 99, 235, 0.25), 6, 0, 0, 2);
+}
+
+.user-bubble-label {
+    -fx-font-size: 13.5px;
+    -fx-text-fill: #ffffff;
+    -fx-wrap-text: true;
+    -fx-line-spacing: 2px;
+}
+
+/* Assistant Bubble: Dark Cyber Terminal with Cyan Border */
+.assistant-bubble {
+    -fx-background-color: #141e33;
+    -fx-background-radius: 16px 16px 16px 2px;
+    -fx-border-color: #1e3a5f;
+    -fx-border-radius: 16px 16px 16px 2px;
+    -fx-border-width: 1px;
+    -fx-padding: 14px 18px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.4), 8, 0, 0, 3);
+}
+
+.assistant-bubble-label {
+    -fx-font-size: 13.5px;
+    -fx-text-fill: #e2e8f0;
+    -fx-wrap-text: true;
+    -fx-line-spacing: 3px;
+}
+
+/* Sender Name Badge Above Bubbles */
+.sender-tag {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #64748b;
+    -fx-padding: 0 4px 3px 4px;
+}
+
+.sender-tag-assistant {
+    -fx-text-fill: #38bdf8;
+}
+
+/* Temporary Thinking Indicator Bubble */
+.thinking-bubble {
+    -fx-background-color: #111c2e;
+    -fx-background-radius: 16px;
+    -fx-border-color: #0284c7;
+    -fx-border-radius: 16px;
+    -fx-border-width: 1px;
+    -fx-padding: 10px 16px;
+}
+
+.thinking-label {
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+    -fx-text-fill: #38bdf8;
+}
+
+/* =============================================================================
+   Bottom Input Bar & Send Button
+   ============================================================================= */
+.input-bar-container {
+    -fx-background-color: #0f172a;
+    -fx-border-color: #1e293b;
+    -fx-border-width: 1px 0 0 0;
+}
+
+.message-input-field {
+    -fx-background-color: #1e293b;
+    -fx-text-fill: #f8fafc;
+    -fx-prompt-text-fill: #64748b;
+    -fx-background-radius: 10px;
+    -fx-border-color: #334155;
+    -fx-border-radius: 10px;
+    -fx-border-width: 1.5px;
+    -fx-padding: 10px 14px;
+    -fx-font-size: 13.5px;
+}
+
+.message-input-field:focused {
+    -fx-border-color: #00e5ff;
+    -fx-effect: dropshadow(gaussian, rgba(0, 229, 255, 0.35), 8, 0, 0, 0);
+}
+
+.send-button {
+    -fx-background-color: #0284c7;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px 22px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(2, 132, 199, 0.4), 6, 0, 0, 2);
+}
+
+.send-button:hover {
+    -fx-background-color: #0369a1;
+    -fx-effect: dropshadow(gaussian, rgba(56, 189, 248, 0.6), 10, 0, 0, 0);
+}
+
+.send-button:pressed {
+    -fx-background-color: #075985;
+}
+
+.send-button:disabled {
+    -fx-background-color: #1e293b;
+    -fx-text-fill: #64748b;
+    -fx-effect: none;
+    -fx-cursor: default;
+}
+
+.footer-hint {
+    -fx-font-size: 11px;
+    -fx-text-fill: #475569;
+}
