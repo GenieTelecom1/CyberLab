@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      spacing="18.0" styleClass="dashboard-content"
+      fx:controller="com.cyberlab.controller.SimulationController">
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="14.0" styleClass="card">
+            <children>
+                <Label text="Simulation : Phishing Detector" styleClass="section-title" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="lblEmailCounter" text="Email 1 sur 8" styleClass="section-label" />
+                <Label fx:id="lblScore" text="Score : 0 / 0" styleClass="rank-score" />
+            </children>
+        </HBox>
+
+        <VBox spacing="12.0" styleClass="card" VBox.vgrow="ALWAYS">
+            <children>
+                <HBox spacing="8.0">
+                    <children>
+                        <Label text="De :" styleClass="muted" />
+                        <Label fx:id="lblExpediteur" styleClass="card-title" />
+                    </children>
+                </HBox>
+                <HBox spacing="8.0">
+                    <children>
+                        <Label text="Objet :" styleClass="muted" />
+                        <Label fx:id="lblObjet" styleClass="card-title" />
+                    </children>
+                </HBox>
+                <TextArea fx:id="txtCorps" editable="false" wrapText="true" VBox.vgrow="ALWAYS" />
+            </children>
+        </VBox>
+
+        <HBox alignment="CENTER" spacing="24.0">
+            <children>
+                <Button fx:id="btnLegitime" text="✓ Légitime" onAction="#handleLegitimeAction"
+                        styleClass="btn-cyan" prefWidth="180.0" />
+                <Button fx:id="btnFrauduleux" text="⚠ Frauduleux" onAction="#handleFrauduleuxAction"
+                        styleClass="btn-violet" prefWidth="180.0" />
+            </children>
+        </HBox>
+
+        <VBox fx:id="paneFeedback" managed="false" visible="false" spacing="10.0" styleClass="card">
+            <children>
+                <Label fx:id="lblResultat" styleClass="card-title" />
+                <VBox fx:id="vboxIndices" spacing="4.0" />
+                <Label fx:id="lblConseilSecurite" wrapText="true" styleClass="muted" />
+                <HBox alignment="CENTER_RIGHT">
+                    <children>
+                        <Button fx:id="btnSuivant" text="Email suivant ➔" onAction="#handleSuivantAction"
+                                styleClass="primary-button" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</VBox>

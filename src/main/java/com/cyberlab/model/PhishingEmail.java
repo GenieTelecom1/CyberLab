@@ -1,4 +1,4 @@
-package com.example.demo1;
+package com.cyberlab.model;
 
 import java.util.List;
 

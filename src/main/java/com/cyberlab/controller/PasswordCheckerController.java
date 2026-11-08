@@ -1,5 +1,7 @@
-package com.example.demo1;
+package com.cyberlab.controller;
 
+import com.cyberlab.model.PasswordStrengthResult;
+import com.cyberlab.service.PasswordService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -27,7 +29,7 @@ public class PasswordCheckerController {
     }
 
     private void analyserMotDePasse(String password) {
-        PasswordResult result = passwordService.evaluerMotDePasse(password);
+        PasswordStrengthResult result = passwordService.evaluerMotDePasse(password);
 
         double progress = result.getScore() / 100.0;
         progressScore.setProgress(progress);

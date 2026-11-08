@@ -386,3 +386,53 @@
 .sidebar-panel-title { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: -text; }
 .sidebar-panel-sub { -fx-font-size: 12px; -fx-text-fill: #dbe7f5; }
 .sidebar-accent { -fx-background-color: -cyan; -fx-background-radius: 2; }
+
+.list-view .list-cell,
+.list-view .list-cell:odd,
+.list-view .list-cell:even {
+    -fx-background-color: transparent;
+    -fx-text-fill: -text;
+    -fx-padding: 10 12;
+    -fx-background-radius: 8;
+}
+.list-view .list-cell:empty { -fx-background-color: transparent; }
+.list-view .list-cell:filled:hover {
+    -fx-background-color: rgba(0,210,255,0.08);
+}
+.list-view .list-cell:filled:selected,
+.list-view:focused .list-cell:filled:selected {
+    -fx-background-color: rgba(0,210,255,0.18);
+    -fx-border-color: transparent transparent transparent -cyan;
+    -fx-border-width: 0 0 0 3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+/* ===== Simulation phishing ===== */
+.text-area {
+    -fx-control-inner-background: #0f1729;
+    -fx-highlight-fill: rgba(0,210,255,0.35);
+}
+.text-area .content { -fx-background-color: #0f1729; -fx-background-radius: 10; }
+.text-area .scroll-pane { -fx-background-color: transparent; }
+.text-area .viewport { -fx-background-color: #0f1729; }
+.btn-cyan:disabled, .btn-violet:disabled { -fx-opacity: 0.5; }
+.btn-login {
+    -fx-background-color: transparent;
+    -fx-border-color: #00e5ff;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #00e5ff;
+    -fx-padding: 8px 18px;
+    -fx-cursor: hand;
+}
+.btn-login:hover { -fx-background-color: rgba(0, 229, 255, 0.12); }
+
+.btn-signup {
+    -fx-background-color: #22c55e;
+    -fx-background-radius: 6px;
+    -fx-text-fill: #0b0f19;
+    -fx-font-weight: bold;
+    -fx-padding: 8px 18px;
+    -fx-cursor: hand;
+}
+.btn-signup:hover { -fx-background-color: #16a34a; }

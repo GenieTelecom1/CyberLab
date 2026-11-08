@@ -1,5 +1,8 @@
 package com.cyberlab.controller;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import java.io.IOException;
 import com.cyberlab.util.Icons;
 import com.cyberlab.util.SceneManager;
 import javafx.fxml.FXML;
@@ -28,6 +31,7 @@ public class MainShellController {
         navButtons.put("phishing_simulation", navSimulations);
         navButtons.put("leaderboard", navLeaderboard);
         navButtons.put("chatbot", navChatbot);
+        titles.put("history", "Historique");
 
         setIcon(navDashboard, Icons.HOME);
         setIcon(navCourses, Icons.BOOK_OPEN);
@@ -76,4 +80,23 @@ public class MainShellController {
     @FXML private void goLeaderboard() { SceneManager.navigateTo("leaderboard"); }
     @FXML private void goChatbot()     { SceneManager.navigateTo("chatbot"); }
     @FXML private void logout()        { SceneManager.logout(); }
+
+    @FXML
+    private void onLogin() {
+        openScreen("/fxml/login.fxml");
+    }
+
+    @FXML
+    private void onSignup() {
+        openScreen("/fxml/signup.fxml");
+    }
+
+    private void openScreen(String fxmlPath) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+            contentArea.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
