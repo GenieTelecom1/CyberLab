@@ -2,9 +2,7 @@ package com.cyberlab.database;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import com.cyberlab.util.ConfigFiles;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -23,17 +21,13 @@ public final class DatabaseConnection {
 
     public static synchronized void init() {
         if (dataSource != null) return;
-        Properties p = new Properties();
-        try (InputStream in = new FileInputStream("db.properties")) {
-            p.load(in);
-        } catch (IOException e) {
-            // pas de fichier : on tente les variables d'environnement
-        }
+        Properties p = ConfigFiles.load("db.properties"); // sinon : variables d'environnement
         String url = config(p, "CYBERLAB_DB_URL", "db.url");
         String user = config(p, "CYBERLAB_DB_USER", "db.user");
         String password = config(p, "CYBERLAB_DB_PASSWORD", "db.password");
         if (url == null || user == null || password == null) {
-            throw new IllegalStateException("Configuration BD manquante (db.properties)");
+            throw new IllegalStateException("Configuration BD manquante (db.properties : dossier du projet, "
+                    + "%APPDATA%\\CyberLab ou CYBERLAB_HOME)");
         }
         HikariConfig cfg = new HikariConfig();
         cfg.setJdbcUrl(url);
@@ -68,11 +62,5 @@ public final class DatabaseConnection {
             dataSource.close();
             dataSource = null;
         }
-    }
-    /**
-     * Id utilisateur temporaire en mode développement.
-     */
-    public static int devUserId() {
-        return 1;
     }
 }

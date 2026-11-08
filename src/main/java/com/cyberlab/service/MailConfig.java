@@ -1,8 +1,6 @@
 package com.cyberlab.service;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import com.cyberlab.util.ConfigFiles;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Properties;
@@ -33,13 +31,7 @@ public record MailConfig(String host, int port, String user, String password,
 
     /** Configuration réelle : variables d'environnement puis mail.properties. Vide si non configuré. */
     public static Optional<MailConfig> load() {
-        Properties p = new Properties();
-        try (InputStream in = new FileInputStream("mail.properties")) {
-            p.load(in);
-        } catch (IOException e) {
-            // pas de fichier : on tente les variables d'environnement
-        }
-        return from(p, System::getenv);
+        return from(ConfigFiles.load("mail.properties"), System::getenv);
     }
 
     /** Testable : les propriétés et l'environnement sont injectés. */

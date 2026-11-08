@@ -19,7 +19,25 @@ Définir `CYBERLAB_ENV=prod` (ou `-Dcyberlab.env=prod`). L'application refuse al
 configuration d'e-mail, au lieu d'afficher les codes dans la console : un code lisible dans la console
 permettrait à n'importe qui de valider une adresse qui n'est pas la sienne.
 
-## 3. Liste de contrôle avant ouverture aux utilisateurs
+## 3. Construire l'application Windows (.exe)
+
+Prérequis : JDK 17 ou plus (il contient `jpackage`) et Maven. Depuis la racine du projet, dans PowerShell :
+
+```
+.\build-exe.ps1 -Console      # première fois : garde une console pour voir les erreurs
+.\build-exe.ps1               # dossier dist\CyberLab\CyberLab.exe, sans installation
+.\build-exe.ps1 -Installer    # installateur .exe (nécessite WiX Toolset 3.x installé)
+```
+
+L'application installée ne s'exécute pas dans le dossier du projet : elle cherche `db.properties` et
+`mail.properties` dans, dans cet ordre, le dossier courant, `CYBERLAB_HOME`, puis
+`%APPDATA%\CyberLab\` (le dossier à utiliser). Ne mettez pas ces fichiers dans le `.exe` : ils
+contiennent des secrets.
+
+Le point d'entrée empaqueté est `com.cyberlab.Launcher` (écrans d'authentification puis tableau de bord).
+L'application finale du Membre 6 (`MainApp`, vide aujourd'hui) devra la remplacer.
+
+## 4. Liste de contrôle avant ouverture aux utilisateurs
 
 - [ ] `mail.properties` et `db.properties` absents de Git et des livrables (`git ls-files | grep properties`).
 - [ ] Mot de passe de la base réinitialisé (il a circulé entre plusieurs personnes) ; ancien invalide.
@@ -32,7 +50,7 @@ permettrait à n'importe qui de valider une adresse qui n'est pas la sienne.
       et `DatabaseConnection.warmUp()` au début de `Application.start()`, `DatabaseConnection.close()`
       dans `stop()`.
 
-## 4. Limites à connaître (non résolues par ce code)
+## 5. Limites à connaître (non résolues par ce code)
 
 - **Les identifiants sont embarqués dans l'application.** Le mot de passe de la base et le mot de passe
   SMTP doivent être présents sur chaque poste qui lance l'application. Pour un usage pédagogique ou une
