@@ -29,8 +29,7 @@ public class AuthService {
     private static final Duration DELAI_RENVOI = Duration.ofSeconds(60);
     private static final SecureRandom RANDOM = new SecureRandom();
 
-    private static volatile EmailSender emailSender = new ConsoleEmailSender();
-
+    private static volatile EmailSender emailSender = EmailSenders.fromConfig();
     private final UserRepository users = new UserRepository();
     private final AuthCodeRepository codes = new AuthCodeRepository();
 
