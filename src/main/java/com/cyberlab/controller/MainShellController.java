@@ -1,11 +1,10 @@
 package com.cyberlab.controller;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import java.io.IOException;
 import com.cyberlab.util.Icons;
 import com.cyberlab.util.SceneManager;
+import com.cyberlab.util.SessionManager;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -20,6 +19,10 @@ public class MainShellController {
     @FXML private Label pageTitle;
     @FXML private Button navDashboard, navCourses, navQuiz, navSimulations, navLeaderboard, navChatbot, navLogout;
 
+    // Barre du haut : visiteur -> Se connecter / S'inscrire ; connecté -> nom + Déconnexion
+    @FXML private Button loginButton, signupButton, logoutButton;
+    @FXML private Label userLabel;
+
     private final Map<String, Button> navButtons = new LinkedHashMap<>();
     private final Map<String, String> titles = new LinkedHashMap<>();
 
@@ -31,7 +34,6 @@ public class MainShellController {
         navButtons.put("phishing_simulation", navSimulations);
         navButtons.put("leaderboard", navLeaderboard);
         navButtons.put("chatbot", navChatbot);
-        titles.put("history", "Historique");
 
         setIcon(navDashboard, Icons.HOME);
         setIcon(navCourses, Icons.BOOK_OPEN);
@@ -48,14 +50,36 @@ public class MainShellController {
         titles.put("password_simulation", "Simulations");
         titles.put("leaderboard", "Classement");
         titles.put("chatbot", "Assistant IA");
+        titles.put("history", "Historique");
 
-
+        refreshAuthUi();
         SceneManager.registerContentArea(contentArea, this::show);
+    }
+
+    /** Affiche les bons boutons selon que l'utilisateur est connecté ou visiteur. */
+    private void refreshAuthUi() {
+        boolean connecte = SessionManager.isLoggedIn();
+
+        setShown(loginButton, !connecte);
+        setShown(signupButton, !connecte);
+
+        setShown(logoutButton, connecte);
+        setShown(userLabel, connecte);
+        setShown(navLogout, connecte);   // le bouton Déconnexion du menu n'a de sens que si connecté
+
+        if (connecte) userLabel.setText(SessionManager.getCurrentUserName());
+    }
+
+    private static void setShown(Node node, boolean shown) {
+        if (node == null) return;
+        node.setVisible(shown);
+        node.setManaged(shown);
     }
 
     private void show(String view) {
         SceneManager.loadInto(view);
         pageTitle.setText(titles.getOrDefault(view, ""));
+        refreshAuthUi();
         navButtons.forEach((key, b) -> {
             b.getStyleClass().remove("nav-active");
             Icons.recolor(b.getGraphic(), Icons.MUTED);
@@ -79,7 +103,13 @@ public class MainShellController {
     @FXML private void goSimulations() { SceneManager.navigateTo("phishing_simulation"); }
     @FXML private void goLeaderboard() { SceneManager.navigateTo("leaderboard"); }
     @FXML private void goChatbot()     { SceneManager.navigateTo("chatbot"); }
-    @FXML private void logout()        { SceneManager.logout(); }
+
+    /** Déconnexion : on efface la session et on revient au tableau de bord en mode visiteur. */
+    @FXML
+    private void logout() {
+        SessionManager.logout();
+        SceneManager.showShell();
+    }
 
     @FXML
     private void onLogin() {
@@ -90,5 +120,4 @@ public class MainShellController {
     private void onSignup() {
         SceneManager.showScene("signup");
     }
-
 }

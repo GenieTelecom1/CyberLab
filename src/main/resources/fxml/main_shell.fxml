@@ -41,6 +41,8 @@
                     <Region HBox.hgrow="ALWAYS"/>
                     <Button fx:id="loginButton"  text="Se connecter" styleClass="btn-login"  onAction="#onLogin"/>
                     <Button fx:id="signupButton" text="S'inscrire"   styleClass="btn-signup" onAction="#onSignup"/>
+                    <Label fx:id="userLabel" styleClass="muted-small" visible="false" managed="false"/>
+                    <Button fx:id="logoutButton" text="Déconnexion" styleClass="btn-login" onAction="#logout" visible="false" managed="false"/>
                 </HBox>
             </top>
             <center>
