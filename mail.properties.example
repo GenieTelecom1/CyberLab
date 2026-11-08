@@ -1,0 +1,13 @@
+# Copier ce fichier en mail.properties (à la racine du projet, à côté de db.properties).
+# mail.properties contient un secret : il est dans .gitignore, ne jamais le publier.
+# Variables d'environnement équivalentes (prioritaires) : CYBERLAB_MAIL_HOST, _PORT, _USER,
+# _PASSWORD, _FROM, _FROM_NAME, _SECURITY.
+
+# --- Exemple Gmail (compte avec validation en 2 étapes + « mot de passe d'application ») ---
+mail.host=smtp.gmail.com
+mail.port=587
+mail.security=starttls
+mail.user=ADRESSE@gmail.com
+mail.password=MOT_DE_PASSE_D_APPLICATION_16_CARACTERES
+mail.from=ADRESSE@gmail.com
+mail.from.name=CyberLab

@@ -1,6 +1,8 @@
 package com.cyberlab;
 
 import com.cyberlab.database.DatabaseConnection;
+import com.cyberlab.service.AuthService;
+import com.cyberlab.service.EmailSenders;
 import com.cyberlab.util.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -10,6 +12,7 @@ public class AuthDemoApp extends Application {
 
     @Override
     public void start(Stage stage) {
+        AuthService.setEmailSender(EmailSenders.fromConfig()); // SMTP si configuré, sinon console (dev)
         DatabaseConnection.warmUp();
         stage.setTitle("CyberLab");
         stage.setMinWidth(900);
