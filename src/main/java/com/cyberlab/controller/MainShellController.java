@@ -83,20 +83,12 @@ public class MainShellController {
 
     @FXML
     private void onLogin() {
-        openScreen("/fxml/login.fxml");
+        SceneManager.showScene("login");
     }
 
     @FXML
     private void onSignup() {
-        openScreen("/fxml/signup.fxml");
+        SceneManager.showScene("signup");
     }
 
-    private void openScreen(String fxmlPath) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            contentArea.getScene().setRoot(root);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }
