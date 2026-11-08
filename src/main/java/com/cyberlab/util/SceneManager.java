@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 
 import java.io.IOException;
 import java.net.URL;
@@ -61,8 +64,20 @@ public final class SceneManager {
     }
 
     /** Écran autonome (login, register) : change toute la scène. */
+    /** Écran autonome (login, register) : change toute la scène, avec un bouton de retour. */
     public static void showScene(String fxmlName) {
-        setRoot(loadView(fxmlName));
+        setRoot(withBackButton(loadView(fxmlName)));
+    }
+
+    private static Parent withBackButton(Parent content) {
+        Button back = new Button("← Retour au tableau de bord");
+        back.getStyleClass().add("pill-outline");
+        back.setOnAction(e -> showShell());
+
+        StackPane layer = new StackPane(content, back);
+        StackPane.setAlignment(back, Pos.TOP_LEFT);
+        StackPane.setMargin(back, new Insets(16));
+        return layer;
     }
 
     /** Ouvre la coque Dashboard puis affiche l'écran d'accueil. */
