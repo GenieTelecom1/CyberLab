@@ -37,7 +37,11 @@
                     <VBox spacing="2">
                         <Label fx:id="pageTitle" text="Tableau de bord" styleClass="page-title"/>
                     </VBox>
-                    <TextField promptText="Rechercher des cours, labs, utilisateurs…" styleClass="search-field" HBox.hgrow="ALWAYS" maxWidth="520"/>
+                    <TextField fx:id="searchField"
+                               promptText="Rechercher des cours, labs, utilisateurs…"
+                               styleClass="search-field"
+                               HBox.hgrow="ALWAYS" maxWidth="520"
+                               onAction="#onSearch"/>
                     <Region HBox.hgrow="ALWAYS"/>
                     <Button fx:id="loginButton"  text="Se connecter" styleClass="btn-login"  onAction="#onLogin"/>
                     <Button fx:id="signupButton" text="S'inscrire"   styleClass="btn-signup" onAction="#onSignup"/>

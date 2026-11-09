@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Pas de fx:controller : MainShellController est injecté via loader.setController(this) -->
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true" hbarPolicy="NEVER" styleClass="about-scroll">
+    <content>
+        <VBox spacing="28" styleClass="about-root">
+            <padding><Insets top="26" right="30" bottom="34" left="30"/></padding>
+
+            <!-- HERO -->
+            <HBox styleClass="about-hero" spacing="28" alignment="CENTER_LEFT">
+                <VBox spacing="14" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <Label text="À PROPOS DE CYBERLAB" styleClass="about-kicker"/>
+                    <Label text="Apprendre, pratiquer et se protéger en cybersécurité" styleClass="about-title" wrapText="true"/>
+                    <Label wrapText="true" styleClass="about-text"
+                           text="CyberLab est une application éducative qui t'apprend à reconnaître et à éviter les cybermenaces : des cours clairs, des quiz pour tester tes connaissances, des simulations interactives et un assistant IA qui répond à tes questions."/>
+                    <HBox spacing="12">
+                        <Button text="Se connecter" styleClass="btn-login" onAction="#onLogin"/>
+                        <Button text="Créer un compte" styleClass="btn-signup" onAction="#onSignup"/>
+                    </HBox>
+                </VBox>
+                <ImageView fitWidth="300" preserveRatio="true" smooth="true">
+                    <image><Image url="@../images/hero_hacker.png"/></image>
+                </ImageView>
+            </HBox>
+
+            <!-- CHIFFRES CLÉS -->
+            <HBox spacing="16">
+                <VBox styleClass="about-stat" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="6" styleClass="about-stat-value"/>
+                    <Label text="cours à suivre" styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox styleClass="about-stat" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="Quiz" styleClass="about-stat-value"/>
+                    <Label text="pour tester tes connaissances" styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox styleClass="about-stat" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="2" styleClass="about-stat-value"/>
+                    <Label text="simulations interactives" styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox styleClass="about-stat" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="IA" styleClass="about-stat-value"/>
+                    <Label text="un assistant qui répond à tes questions" styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+            </HBox>
+
+            <!-- LES 6 COURS (grille 3 x 2) -->
+            <Label text="6 cours pour commencer" styleClass="about-section"/>
+            <GridPane hgap="16" vgap="16">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="33.33" hgrow="ALWAYS"/>
+                    <ColumnConstraints percentWidth="33.33" hgrow="ALWAYS"/>
+                    <ColumnConstraints percentWidth="33.34" hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="about-card" spacing="6" maxWidth="Infinity">
+                    <Label text="01" styleClass="about-badge"/>
+                    <Label text="Introduction à la cybersécurité" styleClass="about-card-title" wrapText="true"/>
+                    <Label text="Les bases : menaces, risques et bonnes pratiques." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="about-card" spacing="6" maxWidth="Infinity">
+                    <Label text="02" styleClass="about-badge"/>
+                    <Label text="Phishing" styleClass="about-card-title" wrapText="true"/>
+                    <Label text="Reconnaître les emails et sites frauduleux." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="about-card" spacing="6" maxWidth="Infinity">
+                    <Label text="03" styleClass="about-badge"/>
+                    <Label text="Malware" styleClass="about-card-title" wrapText="true"/>
+                    <Label text="Virus, ransomware, spyware : comprendre et se défendre." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="about-card" spacing="6" maxWidth="Infinity">
+                    <Label text="04" styleClass="about-badge"/>
+                    <Label text="Social Engineering" styleClass="about-card-title" wrapText="true"/>
+                    <Label text="Comment les attaquants manipulent les personnes." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="about-card" spacing="6" maxWidth="Infinity">
+                    <Label text="05" styleClass="about-badge"/>
+                    <Label text="Network Security" styleClass="about-card-title" wrapText="true"/>
+                    <Label text="Réseaux, pare-feu, VPN et chiffrement." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="about-card" spacing="6" maxWidth="Infinity">
+                    <Label text="06" styleClass="about-badge"/>
+                    <Label text="Password Security" styleClass="about-card-title" wrapText="true"/>
+                    <Label text="Créer, protéger et gérer ses mots de passe." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+            </GridPane>
+
+            <!-- APRÈS CONNEXION -->
+            <HBox spacing="12" alignment="CENTER_LEFT">
+                <Label text="Ce que tu pourras faire après connexion" styleClass="about-section"/>
+                <Label text="CONNEXION REQUISE" styleClass="about-tag"/>
+            </HBox>
+            <HBox spacing="16">
+                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="Cours" styleClass="about-feature-title"/>
+                    <Label text="Suis ta progression cours par cours." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="Quiz" styleClass="about-feature-title"/>
+                    <Label text="Teste tes connaissances et gagne des points." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="Simulations" styleClass="about-feature-title"/>
+                    <Label text="Détecteur de phishing et test de mot de passe." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="Classement" styleClass="about-feature-title"/>
+                    <Label text="Compare ton score avec les autres apprenants." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="Assistant IA" styleClass="about-feature-title"/>
+                    <Label text="Pose tes questions, il répond à partir des cours." styleClass="about-text-small" wrapText="true"/>
+                </VBox>
+            </HBox>
+
+            <!-- APPEL À L'ACTION -->
+            <HBox styleClass="about-cta" spacing="20" alignment="CENTER_LEFT">
+                <VBox spacing="4" HBox.hgrow="ALWAYS">
+                    <Label text="Prêt à commencer ?" styleClass="about-card-title"/>
+                    <Label text="Connecte-toi pour débloquer toutes les fonctionnalités." styleClass="about-text"/>
+                </VBox>
+                <Button text="Se connecter" styleClass="btn-login" onAction="#onLogin"/>
+                <Button text="Créer un compte" styleClass="btn-signup" onAction="#onSignup"/>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>
