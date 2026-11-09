@@ -4,17 +4,22 @@ import com.cyberlab.util.Icons;
 import com.cyberlab.util.SceneManager;
 import com.cyberlab.util.SessionManager;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /** Propriétaire : Membre 2. Coque : menu latéral + barre du haut + zone centrale. */
 public class MainShellController {
 
+    @FXML private TextField searchField;
     @FXML private StackPane contentArea;
     @FXML private Label pageTitle;
     @FXML private Button navDashboard, navCourses, navQuiz, navSimulations, navLeaderboard, navChatbot, navLogout;
@@ -26,8 +31,15 @@ public class MainShellController {
     private final Map<String, Button> navButtons = new LinkedHashMap<>();
     private final Map<String, String> titles = new LinkedHashMap<>();
 
+    // FXMLLoader rappelle initialize() à chaque loader.setController(this) (page À propos) :
+    // ce drapeau évite la boucle infinie (StackOverflowError).
+    private boolean started = false;
+
     @FXML
     private void initialize() {
+        if (started) return;
+        started = true;
+
         navButtons.put("dashboard", navDashboard);
         navButtons.put("course_list", navCourses);
         navButtons.put("quiz", navQuiz);
@@ -54,20 +66,22 @@ public class MainShellController {
 
         refreshAuthUi();
         SceneManager.registerContentArea(contentArea, this::show);
+        // Pas de navigation ici : SceneManager.showShell() appelle navigateTo("dashboard"),
+        // et show() affiche "À propos" si l'utilisateur n'est pas connecté.
     }
 
     /** Affiche les bons boutons selon que l'utilisateur est connecté ou visiteur. */
     private void refreshAuthUi() {
-        boolean connecte = SessionManager.isLoggedIn();
+        boolean connecte = isLoggedIn();
 
         setShown(loginButton, !connecte);
         setShown(signupButton, !connecte);
 
         setShown(logoutButton, connecte);
         setShown(userLabel, connecte);
-        setShown(navLogout, connecte);   // le bouton Déconnexion du menu n'a de sens que si connecté
+        setShown(navLogout, connecte);
 
-        if (connecte) userLabel.setText(SessionManager.getCurrentUserName());
+        if (connecte && userLabel != null) userLabel.setText(SessionManager.getCurrentUserName());
     }
 
     private static void setShown(Node node, boolean shown) {
@@ -77,6 +91,10 @@ public class MainShellController {
     }
 
     private void show(String view) {
+        if (!isLoggedIn()) {          // visiteur : on ne montre que la page À propos
+            goAbout();
+            return;
+        }
         SceneManager.loadInto(view);
         pageTitle.setText(titles.getOrDefault(view, ""));
         refreshAuthUi();
@@ -97,14 +115,24 @@ public class MainShellController {
         button.setGraphicTextGap(12);
     }
 
-    @FXML private void goDashboard()   { SceneManager.navigateTo("dashboard"); }
-    @FXML private void goCourses()     { SceneManager.navigateTo("course_list"); }
-    @FXML private void goQuiz()        { SceneManager.navigateTo("quiz"); }
-    @FXML private void goSimulations() { SceneManager.navigateTo("phishing_simulation"); }
-    @FXML private void goLeaderboard() { SceneManager.navigateTo("leaderboard"); }
-    @FXML private void goChatbot()     { SceneManager.navigateTo("chatbot"); }
+    @FXML
+    private void onSearch() {
+        if (!requireLogin()) return;
+        String query = searchField.getText();
+        if (query == null || query.isBlank()) return;
+        System.out.println("Recherche : " + query.trim());
+        // TODO: aadi lel page Cours w 7ot el filtre
+        goCourses();
+    }
 
-    /** Déconnexion : on efface la session et on revient au tableau de bord en mode visiteur. */
+    @FXML private void goDashboard()   { if (!requireLogin()) return; SceneManager.navigateTo("dashboard"); }
+    @FXML private void goCourses()     { if (!requireLogin()) return; SceneManager.navigateTo("course_list"); }
+    @FXML private void goQuiz()        { if (!requireLogin()) return; SceneManager.navigateTo("quiz"); }
+    @FXML private void goSimulations() { if (!requireLogin()) return; SceneManager.navigateTo("phishing_simulation"); }
+    @FXML private void goLeaderboard() { if (!requireLogin()) return; SceneManager.navigateTo("leaderboard"); }
+    @FXML private void goChatbot()     { if (!requireLogin()) return; SceneManager.navigateTo("chatbot"); }
+
+    /** Déconnexion : on efface la session et on revient à la coque en mode visiteur. */
     @FXML
     private void logout() {
         SessionManager.logout();
@@ -119,5 +147,28 @@ public class MainShellController {
     @FXML
     private void onSignup() {
         SceneManager.showScene("signup");
+    }
+
+    private boolean isLoggedIn() {
+        return SessionManager.isLoggedIn();
+    }
+
+    @FXML
+    private void goAbout() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+            loader.setController(this);
+            Parent page = loader.load();
+            contentArea.getChildren().setAll(page);
+            pageTitle.setText("À propos");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean requireLogin() {
+        if (isLoggedIn()) return true;
+        goAbout();
+        return false;
     }
 }

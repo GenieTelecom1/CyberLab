@@ -5,8 +5,8 @@ import com.cyberlab.service.CourseService;
 import com.cyberlab.database.DatabaseConnection;
 import com.cyberlab.service.ProgressService;
 import com.cyberlab.util.MarkdownRenderer;
+import com.cyberlab.util.QuizContext;
 import com.cyberlab.util.SceneManager;
-import com.cyberlab.util.SessionManager;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
@@ -16,21 +16,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import com.cyberlab.util.SessionManager;
 
 /**
- * Controleur de l'ecran "Learning" : liste des cours a gauche, contenu a droite,
- * navigation Precedent / Suivant, bouton "Marquer comme termine" et barre de progression.
+ * Controleur de l'ecran "Learning" : liste des cours a gauche, parties du cours selectionne,
+ * contenu a droite, navigation Precedent / Suivant, bouton "Marquer comme termine",
+ * bouton "Passer le quiz du cours" et barre de progression.
  * Les acces a la base sont faits dans des threads separes pour ne pas bloquer l'interface.
  */
 public class CourseController {
 
     @FXML private ListView<Course> courseList;
+    @FXML private ListView<String> sectionList;
     @FXML private WebView contentView;
     @FXML private Label titleLabel;
     @FXML private Label statusLabel;
@@ -39,9 +42,7 @@ public class CourseController {
     @FXML private Button prevButton;
     @FXML private Button nextButton;
     @FXML private Button completeButton;
-
-    /** Bouton créé en code : lance le quiz du cours sélectionné. */
-    private Button quizButton;
+    @FXML private Button quizButton;
 
     private final CourseService courseService = new CourseService();
     private final ProgressService progressService = new ProgressService();
@@ -52,14 +53,8 @@ public class CourseController {
 
     @FXML
     private void initialize() {
-        // Utilisateur réellement connecté (le même que celui du quiz / classement / historique)
+        // TODO membre 1 : remplacer par l'id de l'utilisateur connecte (session du Login).
         userId = SessionManager.getCurrentUserId();
-
-        quizButton = new Button("Passer le quiz →");
-        quizButton.getStyleClass().add("btn-cyan");
-        quizButton.setOnAction(e -> onQuiz());
-        quizButton.setDisable(true);
-        ((Pane) completeButton.getParent()).getChildren().add(quizButton);
 
         courseList.setCellFactory(lv -> new ListCell<>() {
             @Override
@@ -76,6 +71,12 @@ public class CourseController {
 
         courseList.getSelectionModel().selectedItemProperty()
                 .addListener((obs, old, selected) -> showCourse(selected));
+
+        // Clic (ou fleches) sur une partie : le contenu defile jusqu'a cette partie.
+        sectionList.getSelectionModel().selectedIndexProperty()
+                .addListener((obs, old, index) -> scrollToSection(index.intValue()));
+        sectionList.setOnMouseClicked(e ->
+                scrollToSection(sectionList.getSelectionModel().getSelectedIndex()));
 
         setNavigationDisabled(true);
         contentView.getEngine().loadContent(MarkdownRenderer.message("Chargement des cours..."));
@@ -121,8 +122,45 @@ public class CourseController {
             return;
         }
         titleLabel.setText(course.getTitre());
+        sectionList.setItems(FXCollections.observableArrayList(extractSections(course.getContenu())));
         contentView.getEngine().loadContent(MarkdownRenderer.toHtml(course.getContenu()));
         updateButtons();
+    }
+
+    /**
+     * Les "parties" d'un cours sont ses titres de niveau 2 en Markdown ("## 1.1 ...").
+     * On ignore les lignes qui se trouvent dans un bloc de code.
+     */
+    private static List<String> extractSections(String markdown) {
+        List<String> sections = new ArrayList<>();
+        if (markdown == null) {
+            return sections;
+        }
+        boolean inCode = false;
+        for (String line : markdown.split("\\R")) {
+            if (line.stripLeading().startsWith("```")) {
+                inCode = !inCode;
+                continue;
+            }
+            if (!inCode && line.startsWith("## ")) {
+                sections.add(line.substring(3).trim());
+            }
+        }
+        return sections;
+    }
+
+    /** Fait defiler le WebView jusqu'au n-ieme titre <h2> (= la n-ieme partie). */
+    private void scrollToSection(int index) {
+        if (index < 0) {
+            return;
+        }
+        try {
+            contentView.getEngine().executeScript(
+                    "var h = document.getElementsByTagName('h2');"
+                            + "if (h.length > " + index + ") { h[" + index + "].scrollIntoView(true); }");
+        } catch (Exception ignored) {
+            // page pas encore chargee : on ne fait rien
+        }
     }
 
     @FXML
@@ -141,13 +179,14 @@ public class CourseController {
         }
     }
 
-    /** Ouvre le quiz du cours sélectionné (le QuizController lit pendingCourseId). */
+    /** Ouvre l'ecran Quiz sur les questions du cours selectionne. */
+    @FXML
     private void onQuiz() {
         Course course = courseList.getSelectionModel().getSelectedItem();
         if (course == null) {
             return;
         }
-        QuizController.pendingCourseId = course.getId();
+        QuizContext.setCourseId(course.getId());
         SceneManager.navigateTo("quiz");
     }
 
@@ -188,10 +227,10 @@ public class CourseController {
         Course course = courseList.getSelectionModel().getSelectedItem();
         prevButton.setDisable(i <= 0);
         nextButton.setDisable(i < 0 || i >= courses.size() - 1);
+        quizButton.setDisable(course == null);
         boolean done = course != null && completedIds.contains(course.getId());
         completeButton.setDisable(course == null || done);
         completeButton.setText(done ? "✓ Cours terminé" : "Marquer comme terminé");
-        quizButton.setDisable(course == null);
     }
 
     private void refreshProgress() {
@@ -206,6 +245,7 @@ public class CourseController {
         prevButton.setDisable(disabled);
         nextButton.setDisable(disabled);
         completeButton.setDisable(disabled);
+        quizButton.setDisable(disabled);
     }
 
     private void showError(String message, Throwable error) {
