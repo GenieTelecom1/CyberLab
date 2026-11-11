@@ -31,7 +31,7 @@ public class MainShellController {
     private final Map<String, Button> navButtons = new LinkedHashMap<>();
     private final Map<String, String> titles = new LinkedHashMap<>();
 
-    // FXMLLoader rappelle initialize() à chaque loader.setController(this) (page À propos) :
+    // FXMLLoader rappelle initialize() à chaque loader.setController(this) (pages À propos / inscription) :
     // ce drapeau évite la boucle infinie (StackOverflowError).
     private boolean started = false;
 
@@ -70,7 +70,7 @@ public class MainShellController {
         // et show() affiche "À propos" si l'utilisateur n'est pas connecté.
     }
 
-    /** Affiche les bons boutons selon que l'utilisateur est connecté ou visiteur. */
+    /** Affiche les bons éléments selon que l'utilisateur est connecté ou visiteur. */
     private void refreshAuthUi() {
         boolean connecte = isLoggedIn();
 
@@ -81,7 +81,16 @@ public class MainShellController {
         setShown(userLabel, connecte);
         setShown(navLogout, connecte);
 
+        // Visiteur : plus de menu latéral ni de recherche -> la page À propos prend toute la largeur.
+        setShown(sidebar(), connecte);
+        setShown(searchField, connecte);
+
         if (connecte && userLabel != null) userLabel.setText(SessionManager.getCurrentUserName());
+    }
+
+    /** Le menu latéral est le parent direct des boutons de navigation. */
+    private Node sidebar() {
+        return navDashboard == null ? null : navDashboard.getParent();
     }
 
     private static void setShown(Node node, boolean shown) {
@@ -111,8 +120,8 @@ public class MainShellController {
     }
 
     private static void setIcon(Button button, String path) {
-        button.setGraphic(Icons.icon(path, 18, Icons.MUTED, null));
-        button.setGraphicTextGap(12);
+        button.setGraphic(Icons.icon(path, 28, Icons.MUTED, null));
+        button.setGraphicTextGap(6);
     }
 
     @FXML
@@ -144,8 +153,15 @@ public class MainShellController {
         SceneManager.showScene("login");
     }
 
+    /** "S'inscrire" : page de présentation (Visiteur / Compte gratuit) avant le vrai formulaire. */
     @FXML
     private void onSignup() {
+        goJoin();
+    }
+
+    /** Bouton "Créer mon compte gratuit" de la page join.fxml. */
+    @FXML
+    private void onCreateAccount() {
         SceneManager.showScene("signup");
     }
 
@@ -155,12 +171,21 @@ public class MainShellController {
 
     @FXML
     private void goAbout() {
+        loadPage("/fxml/about.fxml", "À propos");
+    }
+
+    private void goJoin() {
+        loadPage("/fxml/join.fxml", "Créer un compte");
+    }
+
+    private void loadPage(String fxml, String title) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/about.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
             loader.setController(this);
             Parent page = loader.load();
             contentArea.getChildren().setAll(page);
-            pageTitle.setText("À propos");
+            pageTitle.setText(title);
+            refreshAuthUi();
         } catch (IOException e) {
             e.printStackTrace();
         }

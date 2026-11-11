@@ -84,6 +84,30 @@ public class QuizService {
         return false;
     }
 
+    /** Lettre (A..D) de la bonne réponse : la base stocke une lettre, les questions de secours stockent le texte. */
+    public String lettreCorrecte() {
+        Question q = getCurrentQuestion();
+        if (q == null || q.getBonneReponse() == null) return null;
+        String b = q.getBonneReponse().trim();
+        if (b.length() == 1 && "ABCD".contains(b.toUpperCase())) return b.toUpperCase();
+        String[] choix = {q.getChoixA(), q.getChoixB(), q.getChoixC(), q.getChoixD()};
+        String[] lettres = {"A", "B", "C", "D"};
+        for (int i = 0; i < 4; i++) {
+            if (choix[i] != null && choix[i].trim().equalsIgnoreCase(b)) return lettres[i];
+        }
+        return null;
+    }
+
+    /** Vérifie la réponse choisie (par sa lettre) et met le score à jour. */
+    public boolean verifierReponseParLettre(String lettre) {
+        String bonne = lettreCorrecte();
+        if (bonne != null && bonne.equalsIgnoreCase(lettre)) {
+            score++;
+            return true;
+        }
+        return false;
+    }
+
     public boolean passerQuestionSuivante() {
         currentIndex++;
         return currentIndex < questionsCourantes.size();

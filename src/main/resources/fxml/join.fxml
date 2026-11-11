@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<!-- Pas de fx:controller : MainShellController est injecté via loader.setController(this) -->
+<ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fitToWidth="true" hbarPolicy="NEVER" styleClass="about-scroll">
+    <content>
+        <VBox alignment="TOP_CENTER" spacing="22" styleClass="about-root">
+            <padding><Insets top="26" right="40" bottom="40" left="40"/></padding>
+
+            <HBox alignment="TOP_RIGHT">
+                <Button text="✕" styleClass="join-close" onAction="#goAbout"/>
+            </HBox>
+
+            <Label text="Choisis ton offre CyberLab" styleClass="join-title"/>
+            <Label text="Crée ton compte pour entrer dans le monde de la cybersécurité." styleClass="about-text"/>
+
+            <HBox spacing="22" alignment="TOP_CENTER">
+                <VBox styleClass="join-card" spacing="14" prefWidth="330" minWidth="280" maxWidth="360" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10"><Label text="Visiteur" styleClass="about-feature-title"/></HBox>
+                    <Label text="Découvre CyberLab" styleClass="join-card-h"/>
+                    <Label text="Un aperçu de ce qui t'attend." styleClass="about-text-small" wrapText="true"/>
+                    <Button text="Ton accès actuel" styleClass="join-current" maxWidth="Infinity" disable="true"/>
+                    <HBox alignment="BASELINE_LEFT" spacing="6"><Label text="0 DT" styleClass="join-price"/><Label text="/ toujours" styleClass="about-text-small"/></HBox>
+                    <VBox spacing="9">
+                        <Label text="✓  Page À propos" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Programme des cours" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✕  Accès aux cours" styleClass="join-no" wrapText="true"/>
+                        <Label text="✕  Quiz et score" styleClass="join-no" wrapText="true"/>
+                        <Label text="✕  Simulations" styleClass="join-no" wrapText="true"/>
+                        <Label text="✕  Assistant IA" styleClass="join-no" wrapText="true"/>
+                    </VBox>
+                </VBox>
+                <VBox styleClass="join-card-main" spacing="14" prefWidth="330" minWidth="280" maxWidth="360" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10"><Label text="Pro" styleClass="about-feature-title"/><Region HBox.hgrow="ALWAYS"/><Label text="POPULAIRE" styleClass="about-tag"/></HBox>
+                    <Label text="Compte Pro" styleClass="join-card-h"/>
+                    <Label text="Tout pour apprendre et progresser." styleClass="about-text-small" wrapText="true"/>
+                    <Button text="Choisir Pro" styleClass="join-cta" maxWidth="Infinity" onAction="#onCreateAccount"/>
+                    <HBox alignment="BASELINE_LEFT" spacing="6"><Label text="100 DT" styleClass="join-price"/><Label text="/ mois" styleClass="about-text-small"/></HBox>
+                    <VBox spacing="9">
+                        <Label text="✓  6 cours complets, partie par partie" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Un quiz par cours avec correction" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Simulations : phishing et mot de passe" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Assistant IA basé sur les cours" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Classement et suivi de progression" styleClass="join-ok" wrapText="true"/>
+                    </VBox>
+                </VBox>
+                <VBox styleClass="join-card-premium" spacing="14" prefWidth="330" minWidth="280" maxWidth="360" HBox.hgrow="ALWAYS">
+                    <HBox alignment="CENTER_LEFT" spacing="10"><Label text="Premium" styleClass="about-feature-title"/><Region HBox.hgrow="ALWAYS"/><Label text="PRO MAX" styleClass="about-tag"/></HBox>
+                    <Label text="Compte Premium" styleClass="join-card-h"/>
+                    <Label text="Pour aller plus loin." styleClass="about-text-small" wrapText="true"/>
+                    <Button text="Choisir Premium" styleClass="join-cta-premium" maxWidth="Infinity" onAction="#onCreateAccount"/>
+                    <HBox alignment="BASELINE_LEFT" spacing="6"><Label text="300 DT" styleClass="join-price"/><Label text="/ mois" styleClass="about-text-small"/></HBox>
+                    <VBox spacing="9">
+                        <Label text="✓  Tout le plan Pro" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Assistant IA illimité" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Certificat de réussite" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Labs et simulations avancés" styleClass="join-ok" wrapText="true"/>
+                        <Label text="✓  Support prioritaire" styleClass="join-ok" wrapText="true"/>
+                    </VBox>
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="8">
+                <Label text="Tu as déjà un compte ?" styleClass="about-text-small"/>
+                <Button text="Se connecter" styleClass="join-link" onAction="#onLogin"/>
+            </HBox>
+        </VBox>
+    </content>
+</ScrollPane>

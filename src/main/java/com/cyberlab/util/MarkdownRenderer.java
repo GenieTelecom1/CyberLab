@@ -22,28 +22,28 @@ public final class MarkdownRenderer {
     private static final HtmlRenderer RENDERER = HtmlRenderer.builder().extensions(EXTENSIONS).build();
 
     private static final String CSS = """
-            body { background:#0f172a; color:#e2e8f0; font-family:'Segoe UI',Arial,sans-serif;
+            body { background:#ffffff; color:#1f2937; font-family:'Segoe UI',Arial,sans-serif;
                    font-size:15px; line-height:1.65; margin:0; padding:24px 32px; }
-            h1 { color:#f8fafc; border-bottom:2px solid #38bdf8; padding-bottom:6px; margin-top:34px; }
-            h2 { color:#7dd3fc; margin-top:28px; }
-            h3 { color:#fde68a; margin-top:22px; }
-            a { color:#60a5fa; }
-            strong { color:#f8fafc; }
-            code { background:#1e293b; color:#fda4af; padding:1px 5px; border-radius:4px; font-family:Consolas,monospace; }
-            blockquote { background:#1e293b; border-left:4px solid #38bdf8; margin:14px 0;
+            h1 { color:#111827; border-bottom:2px solid #c8102e; padding-bottom:6px; margin-top:34px; }
+            h2 { color:#c8102e; margin-top:28px; }
+            h3 { color:#9a3412; margin-top:22px; }
+            a { color:#c8102e; }
+            strong { color:#111827; }
+            code { background:#fdf2f2; color:#b91c1c; padding:1px 5px; border-radius:4px; font-family:Consolas,monospace; }
+            blockquote { background:#fdf2f2; border-left:4px solid #c8102e; margin:14px 0;
                          padding:8px 16px; border-radius:6px; }
             blockquote p { margin:6px 0; }
             table { border-collapse:collapse; width:100%; margin:14px 0; }
-            th { background:#1e3a8a; color:#dbeafe; text-align:left; }
-            th, td { border:1px solid #334155; padding:8px 10px; vertical-align:top; }
-            tr:nth-child(even) td { background:#1e293b; }
+            th { background:#c8102e; color:#ffffff; text-align:left; }
+            th, td { border:1px solid #e5e7eb; padding:8px 10px; vertical-align:top; }
+            tr:nth-child(even) td { background:#fdf2f2; }
             img { max-width:100%; height:auto; border-radius:10px; margin:12px 0; display:block; }
-            hr { border:0; border-top:1px solid #334155; margin:28px 0; }
+            hr { border:0; border-top:1px solid #e5e7eb; margin:28px 0; }
             ul, ol { padding-left:26px; }
             li.task { list-style:none; margin-left:-22px; cursor:pointer; padding:2px 0; }
             li.task input[type=checkbox] { width:16px; height:16px; margin-right:10px; cursor:pointer;
                                            vertical-align:middle; }
-            li.task.done { color:#86efac; text-decoration:line-through; }
+            li.task.done { color:#15803d; text-decoration:line-through; }
             """;
 
     /** Rend les cases a cocher cliquables (clic sur la case ou sur le texte) et barre la ligne cochee. */

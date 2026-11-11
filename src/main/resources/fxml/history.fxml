@@ -12,7 +12,7 @@
     </HBox>
     <VBox spacing="15" styleClass="card" maxWidth="750" VBox.vgrow="ALWAYS">
         <Label text="Ma progression (score en %)" styleClass="card-title"/>
-        <LineChart fx:id="progressChart" prefHeight="230" minHeight="230" legendVisible="false" animated="false" createSymbols="true" style="-fx-base: #0b1220; -fx-background-color: transparent;">
+        <LineChart fx:id="progressChart" prefHeight="230" minHeight="230" legendVisible="false" animated="false" createSymbols="true">
             <xAxis>
                 <CategoryAxis side="BOTTOM"/>
             </xAxis>
@@ -21,7 +21,7 @@
             </yAxis>
         </LineChart>
         <Label text="Mes quiz passés" styleClass="card-title"/>
-        <TableView fx:id="historyTable" VBox.vgrow="ALWAYS" style="-fx-base: #0b1220; -fx-control-inner-background: #0b1220; -fx-background-color: transparent;">
+        <TableView fx:id="historyTable" VBox.vgrow="ALWAYS">
             <columns>
                 <TableColumn fx:id="dateColumn" text="Date" prefWidth="180"/>
                 <TableColumn fx:id="courseColumn" text="Cours" prefWidth="380"/>

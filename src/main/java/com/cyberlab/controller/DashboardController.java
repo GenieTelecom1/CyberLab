@@ -118,7 +118,7 @@ public class DashboardController {
 
         Circle track = new Circle(center, center, radius);
         track.setFill(Color.TRANSPARENT);
-        track.setStroke(Color.web("#25304a"));
+        track.setStroke(Color.web("#F0DDDD"));
         track.setStrokeWidth(7);
 
         Arc arc = new Arc(center, center, radius, radius, 90, 0);   // départ en haut
@@ -294,7 +294,7 @@ public class DashboardController {
         } else {
             banner.getStyleClass().addAll("course-banner", "banner-" + (globalIndex % 4));
             banner.getChildren().add(Icons.icon(Icons.COURSE_ICONS[globalIndex % Icons.COURSE_ICONS.length],
-                    50, Icons.CYAN, Color.web("#00D2FF", 0.18)));
+                    50, Icons.CYAN, Color.web("#C8102E", 0.12)));
         }
         return banner;
     }

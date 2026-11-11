@@ -8,57 +8,71 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cyberlab.controller.AIController"
             styleClass="root-pane"
-            stylesheets="@../css/chatbot.css">
-
-    <top>
-        <HBox spacing="12" alignment="CENTER_LEFT" styleClass="header-bar">
-            <Label text="🛡" styleClass="header-icon"/>
-            <VBox spacing="2">
-                <Label text="Assistant CyberLab" styleClass="header-title"/>
-                <Label text="Pose tes questions sur les cours de cybersécurité" styleClass="header-subtitle"/>
-            </VBox>
-            <Region HBox.hgrow="ALWAYS"/>
-            <HBox spacing="6" alignment="CENTER" styleClass="status-chip">
-                <Label fx:id="statusDot" text="●" styleClass="status-dot"/>
-                <Label fx:id="statusLabel" text="..." styleClass="status-text"/>
-            </HBox>
-        </HBox>
-    </top>
+            stylesheets="@../css/chatbot.css, @../css/theme-red.css">
 
     <center>
-        <ScrollPane fx:id="chatScrollPane" fitToWidth="true"
-                    hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
-                    styleClass="chat-scroll-pane">
-            <content>
-                <VBox fx:id="messageContainer" spacing="10" fillWidth="true" styleClass="chat-container">
-                    <padding>
-                        <Insets top="14" right="12" bottom="14" left="12"/>
-                    </padding>
-                </VBox>
-            </content>
-        </ScrollPane>
-    </center>
-
-    <bottom>
-        <VBox spacing="6" styleClass="input-bar-container">
+        <!-- Le chat est dans un cadre centré (carte blanche arrondie) -->
+        <StackPane>
             <padding>
-                <Insets top="12" right="16" bottom="10" left="16"/>
+                <Insets top="6" right="28" bottom="24" left="14"/>
             </padding>
-            <HBox spacing="10" alignment="CENTER">
-                <TextField fx:id="messageInputField" HBox.hgrow="ALWAYS"
-                           promptText="Écris ta question ici..."
-                           styleClass="message-input-field"
-                           onAction="#handleSendMessage"/>
-                <Button fx:id="sendButton" text="Envoyer"
-                        styleClass="send-button" onAction="#handleSendMessage"/>
-            </HBox>
-            <Label text="Entrée pour envoyer" styleClass="footer-hint"/>
-        </VBox>
-    </bottom>
+
+            <BorderPane styleClass="chat-card" maxWidth="980" StackPane.alignment="TOP_CENTER">
+
+                <top>
+                    <HBox spacing="12" alignment="CENTER_LEFT" styleClass="header-bar">
+                        <Label text="🛡" styleClass="header-icon"/>
+                        <VBox spacing="2">
+                            <Label text="Assistant CyberLab" styleClass="header-title"/>
+                            <Label text="Pose tes questions sur les cours de cybersécurité" styleClass="header-subtitle"/>
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS"/>
+                        <HBox spacing="6" alignment="CENTER" styleClass="status-chip">
+                            <Label fx:id="statusDot" text="●" styleClass="status-dot"/>
+                            <Label fx:id="statusLabel" text="..." styleClass="status-text"/>
+                        </HBox>
+                    </HBox>
+                </top>
+
+                <center>
+                    <ScrollPane fx:id="chatScrollPane" fitToWidth="true"
+                                hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                                styleClass="chat-scroll-pane">
+                        <content>
+                            <VBox fx:id="messageContainer" spacing="12" fillWidth="true" styleClass="chat-container">
+                                <padding>
+                                    <Insets top="18" right="22" bottom="18" left="22"/>
+                                </padding>
+                            </VBox>
+                        </content>
+                    </ScrollPane>
+                </center>
+
+                <bottom>
+                    <VBox spacing="6" styleClass="input-bar-container">
+                        <padding>
+                            <Insets top="14" right="20" bottom="12" left="20"/>
+                        </padding>
+                        <HBox spacing="10" alignment="CENTER">
+                            <TextField fx:id="messageInputField" HBox.hgrow="ALWAYS"
+                                       promptText="Écris ta question ici..."
+                                       styleClass="message-input-field"
+                                       onAction="#handleSendMessage"/>
+                            <Button fx:id="sendButton" text="Envoyer"
+                                    styleClass="send-button" onAction="#handleSendMessage"/>
+                        </HBox>
+                        <Label text="Entrée pour envoyer" styleClass="footer-hint"/>
+                    </VBox>
+                </bottom>
+
+            </BorderPane>
+        </StackPane>
+    </center>
 </BorderPane>

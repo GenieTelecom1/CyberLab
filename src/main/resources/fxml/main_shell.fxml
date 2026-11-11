@@ -6,41 +6,34 @@
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cyberlab.controller.MainShellController" styleClass="root-pane">
     <left>
-        <VBox styleClass="sidebar" prefWidth="230" spacing="6">
-            <VBox styleClass="logo-box" spacing="2">
-                <Label text="CyberLab" styleClass="logo-title"/>
-                <Label text="APPRENDRE. PRATIQUER. PROTÉGER." styleClass="logo-sub"/>
-            </VBox>
-            <Label text="PRINCIPAL" styleClass="section-label"/>
-            <Button fx:id="navDashboard"   text="Tableau de bord" styleClass="nav-button" maxWidth="Infinity" onAction="#goDashboard"/>
-            <Button fx:id="navCourses"     text="Cours"           styleClass="nav-button" maxWidth="Infinity" onAction="#goCourses"/>
-            <Button fx:id="navQuiz"        text="Quiz"            styleClass="nav-button" maxWidth="Infinity" onAction="#goQuiz"/>
-            <Button fx:id="navSimulations" text="Simulations"     styleClass="nav-button" maxWidth="Infinity" onAction="#goSimulations"/>
-            <Button fx:id="navLeaderboard" text="Classement"      styleClass="nav-button" maxWidth="Infinity" onAction="#goLeaderboard"/>
-            <Button fx:id="navChatbot"     text="Assistant IA"    styleClass="nav-button" maxWidth="Infinity" onAction="#goChatbot"/>
+        <!-- Les boutons de navigation doivent rester enfants DIRECTS de ce VBox (le contrôleur le masque pour les visiteurs). -->
+        <VBox styleClass="sidebar" prefWidth="116" minWidth="116" maxWidth="116" spacing="10">
+            <Button fx:id="navDashboard" text="Accueil" styleClass="nav-button" contentDisplay="TOP" maxWidth="Infinity" onAction="#goDashboard"/>
+            <Button fx:id="navCourses" text="Cours" styleClass="nav-button" contentDisplay="TOP" maxWidth="Infinity" onAction="#goCourses"/>
+            <Button fx:id="navQuiz" text="Quiz" styleClass="nav-button" contentDisplay="TOP" maxWidth="Infinity" onAction="#goQuiz"/>
+            <Button fx:id="navSimulations" text="Simulations" styleClass="nav-button" contentDisplay="TOP" maxWidth="Infinity" onAction="#goSimulations"/>
+            <Button fx:id="navLeaderboard" text="Classement" styleClass="nav-button" contentDisplay="TOP" maxWidth="Infinity" onAction="#goLeaderboard"/>
+            <Button fx:id="navChatbot" text="Assistant IA" styleClass="nav-button" contentDisplay="TOP" maxWidth="Infinity" onAction="#goChatbot"/>
             <Region VBox.vgrow="ALWAYS"/>
-            <Button fx:id="navLogout" text="Déconnexion" styleClass="nav-button, nav-logout" maxWidth="Infinity" onAction="#logout"/>
-            <VBox styleClass="sidebar-panel" alignment="TOP_CENTER" spacing="6">
-                <ImageView fitWidth="170" preserveRatio="true" smooth="true">
-                    <image><Image url="@../images/sidebar_shield.png"/></image>
-                </ImageView>
-                <Label text="Ensemble" styleClass="sidebar-panel-title"/>
-                <Label text="pour un internet plus sécurisé !" styleClass="sidebar-panel-sub" wrapText="true" textAlignment="CENTER"/>
-                <Region styleClass="sidebar-accent" minWidth="40" prefWidth="40" maxWidth="40" minHeight="3" prefHeight="3" maxHeight="3"/>
-            </VBox>
+            <Button fx:id="navLogout" text="Déconnexion" styleClass="nav-button, nav-logout" contentDisplay="TOP" maxWidth="Infinity" onAction="#logout"/>
         </VBox>
     </left>
     <center>
         <BorderPane>
             <top>
-                <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="16">
-                    <VBox spacing="2">
-                        <Label fx:id="pageTitle" text="Tableau de bord" styleClass="page-title"/>
-                    </VBox>
+                <HBox styleClass="topbar" alignment="CENTER_LEFT" spacing="14">
+                    <ImageView fitHeight="54" preserveRatio="true" smooth="true">
+                        <image><Image url="@../images/logo_cyberlab.png"/></image>
+                    </ImageView>
+                    <HBox spacing="0" alignment="CENTER_LEFT">
+                        <Label text="Cyber" styleClass="brand-a"/>
+                        <Label text="Lab" styleClass="brand-b"/>
+                    </HBox>
+                    <Label fx:id="pageTitle" text="Accueil" styleClass="page-title"/>
                     <TextField fx:id="searchField"
                                promptText="Rechercher des cours, labs, utilisateurs…"
                                styleClass="search-field"
-                               HBox.hgrow="ALWAYS" maxWidth="520"
+                               HBox.hgrow="ALWAYS" maxWidth="460"
                                onAction="#onSearch"/>
                     <Region HBox.hgrow="ALWAYS"/>
                     <Button fx:id="loginButton"  text="Se connecter" styleClass="btn-login"  onAction="#onLogin"/>
