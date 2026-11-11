@@ -23,3 +23,5 @@ config.properties
 config.properties
 >>>>>>> ab96d20065a1be2557a3d3857d8585450b2e6975
 config.properties
+installer-input/
+installer-output/
