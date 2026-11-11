@@ -23,6 +23,8 @@ jobs:
             --input installer-input --main-jar cyberlab.jar \
             --main-class com.cyberlab.Launcher \
             --icon packaging/CyberLab.ico \
+            --add-modules java.base,java.desktop,java.logging,java.management,java.naming,java.net.http,java.sql,java.xml,jdk.crypto.ec,jdk.crypto.cryptoki,jdk.unsupported,jdk.jsobject,jdk.xml.dom \
+            --win-console \
             --win-shortcut --win-menu --win-dir-chooser \
             --dest installer-output
       - uses: actions/upload-artifact@v4
