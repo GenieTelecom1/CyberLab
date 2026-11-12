@@ -1,0 +1,92 @@
+/* ===== Palette (tbadel hna el couleurs mara wa7da) ===== */
+.root {
+    -dk-bg: #0a0a0e;
+    -dk-surface: #121218;
+    -dk-surface2: #1a1a22;
+    -dk-border: #2b2b35;
+    -dk-text: #f4f4f5;
+    -dk-muted: #a1a1aa;
+    -dk-red: #ef4444;
+    -dk-red-dark: #b91c1c;
+    -dk-orange: #f97316;
+
+    /* Modena (les controls par défaut yweliw dark) */
+    -fx-base: #1a1a22;
+    -fx-background: #0a0a0e;
+    -fx-control-inner-background: #121218;
+    -fx-accent: #ef4444;
+    -fx-focus-color: #ef4444;
+    -fx-faint-focus-color: #ef444422;
+    -fx-text-base-color: #f4f4f5;
+    -fx-text-background-color: #f4f4f5;
+    -fx-background-color: #0a0a0e;
+}
+
+/* ===== Texte ===== */
+.label, .text { -fx-text-fill: -dk-text; }
+.card-title { -fx-text-fill: -dk-text; }
+.section-label { -fx-text-fill: #f87171; }
+
+/* ===== Conteneurs ===== */
+.dashboard-content { -fx-background-color: -dk-bg; }
+.scroll-pane, .scroll-pane > .viewport { -fx-background-color: transparent; }
+
+.card {
+    -fx-background-color: -dk-surface;
+    -fx-background-radius: 18; -fx-border-radius: 18;
+    -fx-border-color: -dk-border; -fx-border-width: 1;
+    -fx-effect: dropshadow(gaussian, rgba(239,68,68,0.15), 24, 0, 0, 0);
+}
+
+/* ===== Champs (recherche, login, inscription...) ===== */
+.text-field, .password-field, .text-area, .text-area .content {
+    -fx-background-color: -dk-surface2;
+    -fx-text-fill: -dk-text;
+    -fx-prompt-text-fill: -dk-muted;
+    -fx-background-radius: 10;
+    -fx-border-color: -dk-border; -fx-border-radius: 10;
+}
+.text-field:focused, .password-field:focused, .text-area:focused {
+    -fx-border-color: -dk-red;
+}
+
+.combo-box-base {
+    -fx-background-color: -dk-surface2; -fx-background-radius: 10;
+    -fx-border-color: -dk-red; -fx-border-radius: 10;
+}
+.combo-box .list-cell { -fx-text-fill: -dk-text; -fx-background-color: transparent; }
+
+/* ===== Boutons ===== */
+.button {
+    -fx-background-color: linear-gradient(to right, -dk-red-dark, -dk-red);
+    -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;
+}
+.button:hover { -fx-effect: dropshadow(gaussian, rgba(249,115,22,0.7), 14, 0.2, 0, 0); }
+
+/* ===== Tables / listes ===== */
+.table-view, .list-view { -fx-background-color: -dk-surface; -fx-control-inner-background: -dk-surface; }
+.table-view .column-header-background,
+.table-view .column-header, .table-view .filler { -fx-background-color: -dk-surface2; }
+.table-view .column-header .label { -fx-text-fill: #fca5a5; }
+.table-row-cell, .list-cell { -fx-background-color: transparent; -fx-text-fill: -dk-text; }
+.table-row-cell:odd { -fx-background-color: rgba(255,255,255,0.03); }
+.table-row-cell:selected, .list-cell:selected { -fx-background-color: rgba(239,68,68,0.25); }
+
+/* ===== Progress ===== */
+.progress-bar > .track { -fx-background-color: -dk-border; }
+.progress-bar > .bar { -fx-background-color: linear-gradient(to right, -dk-red, -dk-orange); }
+.home-stat, .home-step {
+    -fx-background-color: #121218;
+    -fx-border-color: #2b2b35;
+}
+.home-stat-value, .home-section { -fx-text-fill: #f4f4f5; }
+.home-btn-alt {
+    -fx-background-color: #1a1a22;
+    -fx-text-fill: #f87171;
+    -fx-border-color: #ef4444;
+}
+.home-btn-alt:hover { -fx-background-color: rgba(239,68,68,0.2); }
+.home-round {
+    -fx-background-color: rgba(239,68,68,0.15);
+    -fx-border-color: #7f1d1d;
+}

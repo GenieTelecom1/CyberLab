@@ -8,123 +8,226 @@
 <ScrollPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
             fitToWidth="true" hbarPolicy="NEVER" styleClass="about-scroll">
     <content>
-        <VBox spacing="28" styleClass="about-root">
-            <padding><Insets top="26" right="30" bottom="34" left="30"/></padding>
+        <VBox spacing="26" styleClass="about-root">
+            <padding><Insets top="10" right="40" bottom="40" left="24"/></padding>
 
             <!-- HERO -->
-            <HBox styleClass="about-hero" spacing="28" alignment="CENTER_LEFT">
-                <VBox spacing="14" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
-                    <Label text="À PROPOS DE CYBERLAB" styleClass="about-kicker"/>
-                    <Label text="Apprendre, pratiquer et se protéger en cybersécurité" styleClass="about-title" wrapText="true"/>
+            <HBox styleClass="home-hero" spacing="20" alignment="CENTER_LEFT">
+                <VBox spacing="10" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                    <Label text="Bienvenue sur CyberLab" styleClass="home-pill"/>
+                    <Label text="Deviens acteur de ta" styleClass="home-title" wrapText="true"/>
+                    <Label text="cybersécurité" styleClass="home-title-red"/>
                     <Label wrapText="true" styleClass="about-text"
-                           text="CyberLab est une application éducative qui t'apprend à reconnaître et à éviter les cybermenaces : des cours clairs, des quiz pour tester tes connaissances, des simulations interactives et un assistant IA qui répond à tes questions."/>
-                    <HBox spacing="12">
-                        <Button text="Se connecter" styleClass="btn-login" onAction="#onLogin"/>
-                        <Button text="Créer un compte" styleClass="btn-signup" onAction="#onSignup"/>
+                           text="Apprends, teste et protège-toi dans un monde numérique de plus en plus connecté."/>
+                    <HBox spacing="14">
+                        <Button text="Commencer à apprendre" styleClass="home-btn-main" onAction="#onSignup"/>
+                        <Button text="Se connecter" styleClass="home-btn-alt" onAction="#onLogin"/>
                     </HBox>
                 </VBox>
-                <ImageView fitWidth="300" preserveRatio="true" smooth="true">
-                    <image><Image url="@../images/hero_hacker.png"/></image>
+                <ImageView fitHeight="290" preserveRatio="true" smooth="true">
+                    <image><Image url="@../images/hero_shield.png"/></image>
                 </ImageView>
             </HBox>
 
             <!-- CHIFFRES CLÉS -->
             <HBox spacing="16">
-                <VBox styleClass="about-stat" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
-                    <Label text="6" styleClass="about-stat-value"/>
-                    <Label text="cours à suivre" styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox styleClass="about-stat" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
-                    <Label text="Quiz" styleClass="about-stat-value"/>
-                    <Label text="pour tester tes connaissances" styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox styleClass="about-stat" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
-                    <Label text="2" styleClass="about-stat-value"/>
-                    <Label text="simulations interactives" styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox styleClass="about-stat" spacing="2" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
-                    <Label text="IA" styleClass="about-stat-value"/>
-                    <Label text="un assistant qui répond à tes questions" styleClass="about-text-small" wrapText="true"/>
-                </VBox>
+                <HBox styleClass="home-stat" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <ImageView fitHeight="56" preserveRatio="true" smooth="true"><image><Image url="@../images/ic_book.png"/></image></ImageView>
+                    <VBox spacing="1" HBox.hgrow="ALWAYS"><Label text="6" styleClass="home-stat-value"/><Label text="Cours disponibles" styleClass="about-text-small" wrapText="true"/></VBox>
+                    <Label text="→" styleClass="home-round"/>
+                </HBox>
+                <HBox styleClass="home-stat" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <ImageView fitHeight="56" preserveRatio="true" smooth="true"><image><Image url="@../images/ic_trophy.png"/></image></ImageView>
+                    <VBox spacing="1" HBox.hgrow="ALWAYS"><Label text="1 quiz" styleClass="home-stat-value"/><Label text="Par cours, prêt à relever le défi" styleClass="about-text-small" wrapText="true"/></VBox>
+                    <Label text="→" styleClass="home-round"/>
+                </HBox>
+                <HBox styleClass="home-stat" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <ImageView fitHeight="56" preserveRatio="true" smooth="true"><image><Image url="@../images/ic_game.png"/></image></ImageView>
+                    <VBox spacing="1" HBox.hgrow="ALWAYS"><Label text="2" styleClass="home-stat-value"/><Label text="Simulations interactives" styleClass="about-text-small" wrapText="true"/></VBox>
+                    <Label text="→" styleClass="home-round"/>
+                </HBox>
+                <HBox styleClass="home-stat" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <ImageView fitHeight="56" preserveRatio="true" smooth="true"><image><Image url="@../images/ic_ai.png"/></image></ImageView>
+                    <VBox spacing="1" HBox.hgrow="ALWAYS"><Label text="IA" styleClass="home-stat-value"/><Label text="Ton assistant intelligent" styleClass="about-text-small" wrapText="true"/></VBox>
+                    <Label text="→" styleClass="home-round"/>
+                </HBox>
             </HBox>
 
-            <!-- LES 6 COURS (grille 3 x 2) -->
-            <Label text="6 cours pour commencer" styleClass="about-section"/>
+            <Label text="Comment ça marche ?" styleClass="home-section"/>
+            <HBox spacing="10" alignment="CENTER">
+                <HBox styleClass="home-step" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="1" styleClass="home-step-num"/>
+                    <VBox spacing="2"><Label text="Crée ton compte" styleClass="about-feature-title"/><Label text="C'est rapide et gratuit" styleClass="about-text-small" wrapText="true"/></VBox>
+                </HBox>
+                <Label text="→" styleClass="home-arrow"/>
+                <HBox styleClass="home-step" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="2" styleClass="home-step-num"/>
+                    <VBox spacing="2"><Label text="Apprends" styleClass="about-feature-title"/><Label text="Avec nos cours interactifs" styleClass="about-text-small" wrapText="true"/></VBox>
+                </HBox>
+                <Label text="→" styleClass="home-arrow"/>
+                <HBox styleClass="home-step" spacing="14" alignment="CENTER_LEFT" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="3" styleClass="home-step-num"/>
+                    <VBox spacing="2"><Label text="Teste-toi" styleClass="about-feature-title"/><Label text="Grâce à nos quiz et simulations" styleClass="about-text-small" wrapText="true"/></VBox>
+                </HBox>
+            </HBox>
+
+            <HBox alignment="CENTER_LEFT">
+                <Label text="Nos cours" styleClass="home-section"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Créer un compte pour y accéder  →" styleClass="home-link" onAction="#onSignup"/>
+            </HBox>
             <GridPane hgap="16" vgap="16">
                 <columnConstraints>
                     <ColumnConstraints percentWidth="33.33" hgrow="ALWAYS"/>
                     <ColumnConstraints percentWidth="33.33" hgrow="ALWAYS"/>
                     <ColumnConstraints percentWidth="33.34" hgrow="ALWAYS"/>
                 </columnConstraints>
-
-                <VBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="about-card" spacing="6" maxWidth="Infinity">
-                    <Label text="01" styleClass="about-badge"/>
-                    <Label text="Introduction à la cybersécurité" styleClass="about-card-title" wrapText="true"/>
-                    <Label text="Les bases : menaces, risques et bonnes pratiques." styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="about-card" spacing="6" maxWidth="Infinity">
-                    <Label text="02" styleClass="about-badge"/>
-                    <Label text="Phishing" styleClass="about-card-title" wrapText="true"/>
-                    <Label text="Reconnaître les emails et sites frauduleux." styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="about-card" spacing="6" maxWidth="Infinity">
-                    <Label text="03" styleClass="about-badge"/>
-                    <Label text="Malware" styleClass="about-card-title" wrapText="true"/>
-                    <Label text="Virus, ransomware, spyware : comprendre et se défendre." styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="about-card" spacing="6" maxWidth="Infinity">
-                    <Label text="04" styleClass="about-badge"/>
-                    <Label text="Social Engineering" styleClass="about-card-title" wrapText="true"/>
-                    <Label text="Comment les attaquants manipulent les personnes." styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="about-card" spacing="6" maxWidth="Infinity">
-                    <Label text="05" styleClass="about-badge"/>
-                    <Label text="Network Security" styleClass="about-card-title" wrapText="true"/>
-                    <Label text="Réseaux, pare-feu, VPN et chiffrement." styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="about-card" spacing="6" maxWidth="Infinity">
-                    <Label text="06" styleClass="about-badge"/>
-                    <Label text="Password Security" styleClass="about-card-title" wrapText="true"/>
-                    <Label text="Créer, protéger et gérer ses mots de passe." styleClass="about-text-small" wrapText="true"/>
-                </VBox>
+                <HBox GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="home-course" spacing="14" alignment="CENTER_LEFT" maxWidth="Infinity">
+                    <ImageView fitWidth="118" fitHeight="128" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/course_1.png"/></image>
+                    </ImageView>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                        <Label text="01" styleClass="home-badge"/>
+                        <Label text="Introduction à la cybersécurité" styleClass="home-course-title" wrapText="true"/>
+                        <Label text="Découvre les bases de la sécurité informatique." styleClass="about-text-small" wrapText="true"/>
+                        <Label text="Menaces • CIA • Bons réflexes" styleClass="about-text-small" wrapText="true"/>
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <Label text="15 min" styleClass="home-meta"/>
+                            <Label text="Facile" styleClass="home-level-easy"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="→" styleClass="home-go" onAction="#onSignup"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="home-course" spacing="14" alignment="CENTER_LEFT" maxWidth="Infinity">
+                    <ImageView fitWidth="118" fitHeight="128" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/course_2.png"/></image>
+                    </ImageView>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                        <Label text="02" styleClass="home-badge"/>
+                        <Label text="Phishing" styleClass="home-course-title" wrapText="true"/>
+                        <Label text="Apprends à reconnaître les tentatives d'hameçonnage." styleClass="about-text-small" wrapText="true"/>
+                        <Label text="Définition • Indices • Protection" styleClass="about-text-small" wrapText="true"/>
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <Label text="20 min" styleClass="home-meta"/>
+                            <Label text="Moyen" styleClass="home-level-mid"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="→" styleClass="home-go" onAction="#onSignup"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+                <HBox GridPane.columnIndex="2" GridPane.rowIndex="0" styleClass="home-course" spacing="14" alignment="CENTER_LEFT" maxWidth="Infinity">
+                    <ImageView fitWidth="118" fitHeight="128" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/course_3.png"/></image>
+                    </ImageView>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                        <Label text="03" styleClass="home-badge"/>
+                        <Label text="Malware" styleClass="home-course-title" wrapText="true"/>
+                        <Label text="Comprends les menaces malveillantes et comment te protéger." styleClass="about-text-small" wrapText="true"/>
+                        <Label text="Familles • Infiltration • Prévention" styleClass="about-text-small" wrapText="true"/>
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <Label text="25 min" styleClass="home-meta"/>
+                            <Label text="Difficile" styleClass="home-level-hard"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="→" styleClass="home-go" onAction="#onSignup"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+                <HBox GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="home-course" spacing="14" alignment="CENTER_LEFT" maxWidth="Infinity">
+                    <ImageView fitWidth="118" fitHeight="128" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/course_4.png"/></image>
+                    </ImageView>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                        <Label text="04" styleClass="home-badge"/>
+                        <Label text="Social Engineering" styleClass="home-course-title" wrapText="true"/>
+                        <Label text="Comment les attaquants manipulent les personnes." styleClass="about-text-small" wrapText="true"/>
+                        <Label text="Techniques • Scénarios • Défense" styleClass="about-text-small" wrapText="true"/>
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <Label text="20 min" styleClass="home-meta"/>
+                            <Label text="Moyen" styleClass="home-level-mid"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="→" styleClass="home-go" onAction="#onSignup"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="home-course" spacing="14" alignment="CENTER_LEFT" maxWidth="Infinity">
+                    <ImageView fitWidth="118" fitHeight="128" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/course_5.png"/></image>
+                    </ImageView>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                        <Label text="05" styleClass="home-badge"/>
+                        <Label text="Network Security" styleClass="home-course-title" wrapText="true"/>
+                        <Label text="Réseaux, pare-feu, VPN et chiffrement." styleClass="about-text-small" wrapText="true"/>
+                        <Label text="Réseau • Pare-feu/VPN • Chiffrement" styleClass="about-text-small" wrapText="true"/>
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <Label text="30 min" styleClass="home-meta"/>
+                            <Label text="Difficile" styleClass="home-level-hard"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="→" styleClass="home-go" onAction="#onSignup"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
+                <HBox GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="home-course" spacing="14" alignment="CENTER_LEFT" maxWidth="Infinity">
+                    <ImageView fitWidth="118" fitHeight="128" preserveRatio="false" smooth="true">
+                        <image><Image url="@../images/course_6.png"/></image>
+                    </ImageView>
+                    <VBox spacing="5" HBox.hgrow="ALWAYS" alignment="CENTER_LEFT">
+                        <Label text="06" styleClass="home-badge"/>
+                        <Label text="Password Security" styleClass="home-course-title" wrapText="true"/>
+                        <Label text="Créer, protéger et gérer ses mots de passe." styleClass="about-text-small" wrapText="true"/>
+                        <Label text="Bon mot de passe • Gestionnaire • 2FA" styleClass="about-text-small" wrapText="true"/>
+                        <HBox spacing="14" alignment="CENTER_LEFT">
+                            <Label text="15 min" styleClass="home-meta"/>
+                            <Label text="Facile" styleClass="home-level-easy"/>
+                            <Region HBox.hgrow="ALWAYS"/>
+                            <Button text="→" styleClass="home-go" onAction="#onSignup"/>
+                        </HBox>
+                    </VBox>
+                </HBox>
             </GridPane>
 
-            <!-- APRÈS CONNEXION -->
             <HBox spacing="12" alignment="CENTER_LEFT">
-                <Label text="Ce que tu pourras faire après connexion" styleClass="about-section"/>
-                <Label text="CONNEXION REQUISE" styleClass="about-tag"/>
+                <Label text="Et bien plus, avec ton compte" styleClass="home-section"/>
+                <Label text="INCLUS" styleClass="about-tag"/>
             </HBox>
             <HBox spacing="16">
-                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
-                    <Label text="Cours" styleClass="about-feature-title"/>
-                    <Label text="Suis ta progression cours par cours." styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                <VBox styleClass="home-feature" spacing="7" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="?" styleClass="home-icon"/>
                     <Label text="Quiz" styleClass="about-feature-title"/>
-                    <Label text="Teste tes connaissances et gagne des points." styleClass="about-text-small" wrapText="true"/>
+                    <Label text="Un quiz par cours" styleClass="about-text-small" wrapText="true"/>
+                    <Label text="✓  Score et correction" styleClass="about-part" wrapText="true"/>
+                    <Label text="✓  Historique de tes résultats" styleClass="about-part" wrapText="true"/>
                 </VBox>
-                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                <VBox styleClass="home-feature" spacing="7" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="!" styleClass="home-icon"/>
                     <Label text="Simulations" styleClass="about-feature-title"/>
-                    <Label text="Détecteur de phishing et test de mot de passe." styleClass="about-text-small" wrapText="true"/>
+                    <Label text="Cas concrets" styleClass="about-text-small" wrapText="true"/>
+                    <Label text="✓  Détecteur de phishing" styleClass="about-part" wrapText="true"/>
+                    <Label text="✓  Testeur de mot de passe" styleClass="about-part" wrapText="true"/>
                 </VBox>
-                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
-                    <Label text="Classement" styleClass="about-feature-title"/>
-                    <Label text="Compare ton score avec les autres apprenants." styleClass="about-text-small" wrapText="true"/>
-                </VBox>
-                <VBox styleClass="about-feature" spacing="6" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                <VBox styleClass="home-feature" spacing="7" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="IA" styleClass="home-icon"/>
                     <Label text="Assistant IA" styleClass="about-feature-title"/>
-                    <Label text="Pose tes questions, il répond à partir des cours." styleClass="about-text-small" wrapText="true"/>
+                    <Label text="Pose tes questions" styleClass="about-text-small" wrapText="true"/>
+                    <Label text="✓  Répond à partir des cours" styleClass="about-part" wrapText="true"/>
+                    <Label text="✓  Explications simples" styleClass="about-part" wrapText="true"/>
+                </VBox>
+                <VBox styleClass="home-feature" spacing="7" HBox.hgrow="ALWAYS" maxWidth="Infinity" prefWidth="100">
+                    <Label text="#" styleClass="home-icon"/>
+                    <Label text="Classement" styleClass="about-feature-title"/>
+                    <Label text="Mesure-toi aux autres" styleClass="about-text-small" wrapText="true"/>
+                    <Label text="✓  Points et rang" styleClass="about-part" wrapText="true"/>
+                    <Label text="✓  Progression par cours" styleClass="about-part" wrapText="true"/>
                 </VBox>
             </HBox>
 
-            <!-- APPEL À L'ACTION -->
-            <HBox styleClass="about-cta" spacing="20" alignment="CENTER_LEFT">
-                <VBox spacing="4" HBox.hgrow="ALWAYS">
-                    <Label text="Prêt à commencer ?" styleClass="about-card-title"/>
-                    <Label text="Connecte-toi pour débloquer toutes les fonctionnalités." styleClass="about-text"/>
+            <HBox styleClass="home-cta" spacing="20" alignment="CENTER_LEFT">
+                <VBox spacing="6" HBox.hgrow="ALWAYS">
+                    <Label text="Prêt à te lancer dans la cybersécurité ?" styleClass="home-cta-title"/>
+                    <Label text="Crée ton compte et débloque les cours, quiz, simulations et l'assistant IA." styleClass="home-cta-text" wrapText="true"/>
                 </VBox>
-                <Button text="Se connecter" styleClass="btn-login" onAction="#onLogin"/>
-                <Button text="Créer un compte" styleClass="btn-signup" onAction="#onSignup"/>
+                <Button text="Voir les offres" styleClass="home-cta-btn" onAction="#onSignup"/>
+                <Button text="Se connecter" styleClass="home-cta-btn2" onAction="#onLogin"/>
             </HBox>
         </VBox>
     </content>

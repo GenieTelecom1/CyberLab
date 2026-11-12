@@ -1,30 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cyberlab.controller.LeaderboardController" alignment="TOP_CENTER" spacing="20" styleClass="dashboard-content">
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.cyberlab.controller.LeaderboardController"
+      alignment="TOP_CENTER" spacing="20" styleClass="dashboard-content">
+
     <HBox alignment="CENTER_LEFT">
         <Label text="CYBERLAB / CLASSEMENT" styleClass="section-label"/>
     </HBox>
+
     <VBox spacing="15" styleClass="card" maxWidth="750" VBox.vgrow="ALWAYS">
         <HBox alignment="CENTER_LEFT" spacing="15">
             <Label text="Top 10" styleClass="card-title"/>
             <ComboBox fx:id="courseFilter" prefWidth="320"/>
         </HBox>
-        <Label fx:id="bestLabel" text="" styleClass="card-title" style="-fx-text-fill: #facc15;"/>
-        <TableView fx:id="leaderboardTable" VBox.vgrow="ALWAYS" style="-fx-base: #0b1220; -fx-control-inner-background: #0b1220; -fx-background-color: transparent;">
-            <columns>
-                <TableColumn fx:id="rankColumn" text="Rang" prefWidth="70"/>
-                <TableColumn fx:id="usernameColumn" text="Utilisateur" prefWidth="300"/>
-                <TableColumn fx:id="scoreColumn" text="Score" prefWidth="100"/>
-                <TableColumn fx:id="badgeColumn" text="Badge" prefWidth="180"/>
-            </columns>
-            <columnResizePolicy>
-                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
-            </columnResizePolicy>
-        </TableView>
+
+        <Label fx:id="bestLabel" text="" styleClass="card-title" style="-fx-text-fill: #D97706;"/>
+
+        <VBox styleClass="lb-root" spacing="14" VBox.vgrow="ALWAYS">
+            <Label text="LEADERBOARD" styleClass="lb-title" maxWidth="Infinity" alignment="CENTER"/>
+            <HBox fx:id="podiumBox" alignment="CENTER"/>
+            <ListView fx:id="rankList" styleClass="lb-list" VBox.vgrow="ALWAYS"/>
+        </VBox>
+
         <Label fx:id="userRankLabel" text="" styleClass="section-label"/>
     </VBox>
 </VBox>

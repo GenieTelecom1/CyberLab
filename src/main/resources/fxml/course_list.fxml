@@ -8,47 +8,34 @@
 <BorderPane xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.cyberlab.controller.CourseController"
-            style="-fx-background-color: #0b1120;">
+            styleClass="cl-root">
 
     <left>
-        <VBox prefWidth="300" spacing="10"
-              style="-fx-background-color: #111827;"
-              BorderPane.alignment="CENTER">
-
+        <VBox prefWidth="300" spacing="10" styleClass="cl-side" BorderPane.alignment="CENTER">
+            <BorderPane.margin><Insets top="8" right="8" bottom="16" left="10"/></BorderPane.margin>
             <padding>
                 <Insets top="20" right="15" bottom="20" left="15"/>
             </padding>
 
-            <Label text="Liste des cours"
-                   style="-fx-text-fill: #00d9ff; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+            <Label text="Liste des cours" styleClass="cl-title"/>
 
             <!-- Les 6 cours -->
-            <ListView fx:id="courseList"
-                      prefHeight="236" minHeight="236" maxHeight="236"
-                      style="-fx-background-color: #111827;"/>
+            <ListView fx:id="courseList" prefHeight="236" minHeight="236" maxHeight="236"/>
 
             <!-- Les parties (## du Markdown) du cours sélectionné -->
-            <Label text="Parties du cours"
-                   style="-fx-text-fill: #fde68a; -fx-font-size: 14px; -fx-font-weight: bold;">
+            <Label text="Parties du cours" styleClass="cl-sub">
                 <padding>
                     <Insets top="8" right="0" bottom="0" left="0"/>
                 </padding>
             </Label>
 
-            <ListView fx:id="sectionList"
-                      VBox.vgrow="ALWAYS"
-                      style="-fx-background-color: #111827;"/>
+            <ListView fx:id="sectionList" VBox.vgrow="ALWAYS"/>
 
-            <Label text="Votre progression"
-                   style="-fx-text-fill: white; -fx-font-size: 14px;"/>
+            <Label text="Votre progression" styleClass="cl-sub"/>
 
-            <ProgressBar fx:id="progressBar"
-                         prefWidth="270"
-                         progress="0"/>
+            <ProgressBar fx:id="progressBar" prefWidth="270" progress="0"/>
 
-            <Label fx:id="progressLabel"
-                   text="0 / 0 cours terminés"
-                   style="-fx-text-fill: white;"/>
+            <Label fx:id="progressLabel" text="0 / 0 cours terminés"/>
 
         </VBox>
     </left>
@@ -56,38 +43,24 @@
     <center>
         <VBox spacing="15">
             <padding>
-                <Insets top="25" right="25" bottom="20" left="25"/>
+                <Insets top="12" right="25" bottom="20" left="25"/>
             </padding>
 
-            <Label fx:id="titleLabel"
-                   text="Sélectionnez un cours"
-                   style="-fx-text-fill: #00d9ff; -fx-font-size: 24px; -fx-font-weight: bold;"/>
+            <Label fx:id="titleLabel" text="Sélectionnez un cours" styleClass="cl-heading"/>
 
-            <WebView fx:id="contentView"
-                     VBox.vgrow="ALWAYS"/>
+            <WebView fx:id="contentView" VBox.vgrow="ALWAYS"/>
 
-            <Label fx:id="statusLabel"
-                   text=""
-                   style="-fx-text-fill: #00d9ff;"/>
+            <Label fx:id="statusLabel" text="" styleClass="cl-status"/>
 
             <HBox spacing="12" alignment="CENTER_RIGHT">
 
-                <Button fx:id="prevButton"
-                        text="← Précédent"
-                        onAction="#onPrevious"/>
+                <Button fx:id="prevButton" text="← Précédent" styleClass="secondary-button" onAction="#onPrevious"/>
 
-                <Button fx:id="quizButton"
-                        text="Passer le quiz du cours"
-                        styleClass="btn-cyan"
-                        onAction="#onQuiz"/>
+                <Button fx:id="quizButton" text="Passer le quiz du cours" styleClass="btn-cyan" onAction="#onQuiz"/>
 
-                <Button fx:id="completeButton"
-                        text="Marquer comme terminé"
-                        onAction="#onComplete"/>
+                <Button fx:id="completeButton" text="Marquer comme terminé" styleClass="violet-button" onAction="#onComplete"/>
 
-                <Button fx:id="nextButton"
-                        text="Suivant →"
-                        onAction="#onNext"/>
+                <Button fx:id="nextButton" text="Suivant →" styleClass="secondary-button" onAction="#onNext"/>
 
             </HBox>
 

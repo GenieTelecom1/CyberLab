@@ -530,3 +530,58 @@
     -fx-border-radius: 14px;
     -fx-padding: 20px 26px;
 }
+
+/* ===== Compléments À propos + page d'inscription (join) ===== */
+.about-part { -fx-text-fill: #cbd5e1; -fx-font-size: 12.5px; }
+.about-mini { -fx-text-fill: #64748b; -fx-font-size: 10px; -fx-font-weight: bold; -fx-padding: 6px 0 0 0; }
+.about-quizline { -fx-text-fill: #00e5ff; -fx-font-size: 12px; -fx-font-weight: bold; -fx-padding: 6px 0 0 0; }
+.about-feature-icon { -fx-font-size: 22px; }
+.about-step {
+    -fx-background-color: #0f1b2e; -fx-background-radius: 12px;
+    -fx-border-color: #1e3a5f; -fx-border-radius: 12px; -fx-padding: 14px 18px;
+}
+.about-step-num {
+    -fx-text-fill: #04121f; -fx-background-color: #00e5ff; -fx-background-radius: 20px;
+    -fx-min-width: 30px; -fx-min-height: 30px; -fx-alignment: center; -fx-font-weight: bold; -fx-font-size: 14px;
+}
+
+.join-title { -fx-text-fill: #ffffff; -fx-font-size: 30px; -fx-font-weight: bold; }
+.join-close {
+    -fx-background-color: transparent; -fx-text-fill: #94a3b8; -fx-font-size: 16px; -fx-cursor: hand;
+}
+.join-close:hover { -fx-text-fill: #ffffff; }
+.join-card {
+    -fx-background-color: #0f1b2e; -fx-background-radius: 18px;
+    -fx-border-color: #1e3a5f; -fx-border-radius: 18px; -fx-padding: 24px;
+}
+.join-card-main {
+    -fx-background-color: linear-gradient(to bottom, #10243f, #0f1b2e);
+    -fx-background-radius: 18px; -fx-border-color: #00e5ff; -fx-border-radius: 18px; -fx-border-width: 1.5px;
+    -fx-padding: 24px; -fx-effect: dropshadow(gaussian, rgba(0,229,255,0.25), 22, 0, 0, 0);
+}
+.join-card-h { -fx-text-fill: #ffffff; -fx-font-size: 22px; -fx-font-weight: bold; }
+.join-price { -fx-text-fill: #ffffff; -fx-font-size: 30px; -fx-font-weight: bold; }
+.join-ok { -fx-text-fill: #e2e8f0; -fx-font-size: 13px; }
+.join-no { -fx-text-fill: #64748b; -fx-font-size: 13px; }
+.join-current {
+    -fx-background-color: transparent; -fx-border-color: #334155; -fx-border-radius: 22px;
+    -fx-background-radius: 22px; -fx-text-fill: #cbd5e1; -fx-padding: 11px 16px; -fx-opacity: 1;
+}
+.join-cta {
+    -fx-background-color: #00e5ff; -fx-text-fill: #04121f; -fx-font-weight: bold; -fx-font-size: 14px;
+    -fx-background-radius: 22px; -fx-padding: 11px 16px; -fx-cursor: hand;
+}
+.join-cta:hover { -fx-background-color: #5cf0ff; }
+.join-link { -fx-background-color: transparent; -fx-text-fill: #00e5ff; -fx-underline: true; -fx-cursor: hand; }
+
+/* ===== Offre Premium (join.fxml) ===== */
+.join-card-premium {
+    -fx-background-color: linear-gradient(to bottom, #1a1633, #0f1b2e);
+    -fx-background-radius: 18px; -fx-border-color: #a78bfa; -fx-border-radius: 18px; -fx-border-width: 1.5px;
+    -fx-padding: 24px; -fx-effect: dropshadow(gaussian, rgba(167,139,250,0.28), 22, 0, 0, 0);
+}
+.join-cta-premium {
+    -fx-background-color: #a78bfa; -fx-text-fill: #0b0720; -fx-font-weight: bold; -fx-font-size: 14px;
+    -fx-background-radius: 22px; -fx-padding: 11px 16px; -fx-cursor: hand;
+}
+.join-cta-premium:hover { -fx-background-color: #c4b5fd; }

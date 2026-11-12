@@ -227,17 +227,13 @@ public class AIService {
     }
 
     private static String loadPropertyFromFile(String filePath, String propertyKey) {
-        File file = new File(filePath);
-        if (file.exists() && file.isFile()) {
-            try (InputStream is = new FileInputStream(file)) {
-                Properties props = new Properties();
-                props.load(is);
-                String val = props.getProperty(propertyKey);
-                if (val != null && !val.isBlank()) {
-                    return val.trim();
-                }
-            } catch (Exception ignored) {
+        try {
+            java.util.Properties props = com.cyberlab.util.ConfigFiles.load(filePath);
+            String val = props.getProperty(propertyKey);
+            if (val != null && !val.isBlank()) {
+                return val.trim();
             }
+        } catch (Exception ignored) {
         }
         return null;
     }

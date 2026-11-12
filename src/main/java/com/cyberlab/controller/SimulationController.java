@@ -195,13 +195,13 @@ public class SimulationController {
         }
         vboxIndices.getChildren().clear();
         Label headerIndices = new Label("Indices suspects :");
-        headerIndices.setStyle("-fx-font-weight: bold; -fx-text-fill: #00D2FF;");
+        headerIndices.setStyle("-fx-font-weight: bold; -fx-text-fill: #C8102E;");
         vboxIndices.getChildren().add(headerIndices);
 
         if (email.getIndicesSuspects() != null && !email.getIndicesSuspects().isEmpty()) {
             for (String indice : email.getIndicesSuspects()) {
                 Label lblIndice = new Label("  • " + indice);
-                lblIndice.setTextFill(Color.web("#F8FAFC"));
+                lblIndice.setTextFill(Color.web("#1F2937"));
                 vboxIndices.getChildren().add(lblIndice);
             }
         }

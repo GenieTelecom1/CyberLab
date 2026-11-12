@@ -24,7 +24,7 @@ import java.util.List;
 public class HistoryController {
 
     private static final int MAX_POINTS_ON_CHART = 15;
-    private static final String CHART_COLOR = "#19D6FF";
+    private static final String CHART_COLOR = "#C8102E";
 
     @FXML private TableView<QuizHistory> historyTable;
     @FXML private TableColumn<QuizHistory, String> dateColumn;
@@ -107,7 +107,7 @@ public class HistoryController {
             if (line != null) line.setStyle("-fx-stroke: " + CHART_COLOR + "; -fx-stroke-width: 2px;");
             for (XYChart.Data<String, Number> point : series.getData()) {
                 Node n = point.getNode();
-                if (n != null) n.setStyle("-fx-background-color: " + CHART_COLOR + ", #0b1220;");
+                if (n != null) n.setStyle("-fx-background-color: " + CHART_COLOR + ", #ffffff;");
             }
             Node plot = progressChart.lookup(".chart-plot-background");
             if (plot != null) plot.setStyle("-fx-background-color: transparent;");

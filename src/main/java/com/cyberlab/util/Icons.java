@@ -13,11 +13,11 @@ import javafx.scene.shape.StrokeLineJoin;
  */
 public final class Icons {
 
-    public static final Color CYAN = Color.web("#00D2FF");
-    public static final Color VIOLET = Color.web("#B76CF2");
+    public static final Color CYAN = Color.web("#C8102E");
+    public static final Color VIOLET = Color.web("#E11D48");
     public static final Color ORANGE = Color.web("#F97316");
     public static final Color GOLD = Color.web("#FBBF24");
-    public static final Color MUTED = Color.web("#94A3B8");
+    public static final Color MUTED = Color.web("#6B7280");
 
     public static final String SHIELD_PLUS = "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z M12 8v6 M9 11h6";
     public static final String MAIL = "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z M22 6l-10 7L2 6";

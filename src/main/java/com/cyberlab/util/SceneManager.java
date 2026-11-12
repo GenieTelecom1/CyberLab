@@ -123,6 +123,10 @@ public final class SceneManager {
             scene = new Scene(root, WIDTH, HEIGHT);
             URL css = SceneManager.class.getResource(CSS_PATH);
             if (css != null) scene.getStylesheets().add(css.toExternalForm());
+
+            URL theme = SceneManager.class.getResource("/css/theme-red.css");
+            if (theme != null) scene.getStylesheets().add(theme.toExternalForm());
+            URL dark = SceneManager.class.getResource("/css/theme-dark.css");
             stage.setScene(scene);
         } else {
             scene.setRoot(root);

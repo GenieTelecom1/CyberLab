@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <!-- Panneau de gauche commun à tous les écrans d'authentification (inclus avec fx:include) -->
@@ -8,11 +9,9 @@
       styleClass="auth-hero" alignment="CENTER_LEFT" spacing="22"
       prefWidth="480" minWidth="380" HBox.hgrow="NEVER">
     <StackPane styleClass="hero-icon-wrap" maxWidth="-Infinity" maxHeight="-Infinity">
-        <Region styleClass="icon-shield"/>
-        <VBox alignment="CENTER" maxWidth="-Infinity" maxHeight="-Infinity" translateY="4">
-            <Region styleClass="lock-shackle"/>
-            <Region styleClass="lock-body"/>
-        </VBox>
+        <ImageView fitHeight="120" preserveRatio="true" smooth="true" styleClass="hero-logo">
+            <image><Image url="@../images/logo_cyberlab.png"/></image>
+        </ImageView>
     </StackPane>
     <VBox spacing="4">
         <Label text="CyberLab" styleClass="brand-title"/>
