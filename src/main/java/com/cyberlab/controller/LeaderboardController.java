@@ -69,14 +69,16 @@ public class LeaderboardController {
     }
 
     /**
-     * username -> gender. Ken el requête tfashal, el classement yekhdem kif ma houwa (couleur bleu par défaut).
+     * nom -> gender. Ken el requête tfashal, el classement yekhdem kif ma houwa (couleur bleu par défaut).
      */
     private Map<String, String> chargerGenres() {
         Map<String, String> m = new HashMap<>();
         try (Connection conn = DatabaseConnection.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT username, gender FROM users");
+             PreparedStatement ps = conn.prepareStatement("SELECT nom, gender FROM users");
              ResultSet rs = ps.executeQuery()) {
-            while (rs.next()) m.put(rs.getString("username"), rs.getString("gender"));
+            while (rs.next()) {
+                m.put(rs.getString("nom"), rs.getString("gender"));
+            }
         } catch (Exception e) {
             System.err.println("Genre indisponible : " + e.getMessage());
         }
